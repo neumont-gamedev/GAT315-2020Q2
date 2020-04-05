@@ -7,8 +7,9 @@ public class PhysicsWorld : MonoBehaviour
     [HideInInspector] public List<PhysicsBody> bodies = new List<PhysicsBody>();
 
     static public Vector2 gravity { get; set; } = new Vector2(0, -9.81f);
-    static public float fixedTimeStep { get; set; } = (1.0f / 60.0f);
-    public float timeAccumulator { get; set; } = 0.0f;
+    static public float fixedTimeStep { get; set; } = (1.0f / 60.0f); // 0.016
+
+    float timeAccumulator { get; set; } = 0.0f;
 
     void Update()
     {
@@ -16,8 +17,10 @@ public class PhysicsWorld : MonoBehaviour
         while (timeAccumulator > fixedTimeStep)
         {
             bodies.ForEach(body => body.Step(fixedTimeStep));
+
             timeAccumulator = timeAccumulator - fixedTimeStep;
         }
+
         bodies.ForEach(body => body.force = Vector2.zero);
     }
 }
