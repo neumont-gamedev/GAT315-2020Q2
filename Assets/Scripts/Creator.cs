@@ -27,7 +27,7 @@ public class Creator : MonoBehaviour
                 Vector2 direction = body.position - position;
                 if (direction.magnitude <= 4.0f)
                 {
-                    body.ApplyForce(direction.normalized * (4.0f - direction.magnitude), PhysicsBody.eForceMode.IMPULSE);
+                    body.ApplyForce(direction.normalized * (4.0f - direction.magnitude), PhysicsBody.eForceMode.ACCELERATION);
                 }
             }
 
