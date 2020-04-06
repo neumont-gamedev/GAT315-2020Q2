@@ -14,7 +14,7 @@ public class Creator : MonoBehaviour
             Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             GameObject go = Instantiate(m_gameObject, position, Quaternion.identity);
             PhysicsBody body = go.GetComponent<PhysicsBody>();
-            //body.ApplyForce(Random.insideUnitCircle.normalized * 4.0f, PhysicsBody.eForceMode.VELOCITY);
+            body.ApplyForce(Random.insideUnitCircle.normalized * 4.0f, PhysicsBody.eForceMode.VELOCITY);
 
             m_physicsWorld.bodies.Add(body);
         }
@@ -27,11 +27,9 @@ public class Creator : MonoBehaviour
                 Vector2 direction = body.position - position;
                 if (direction.magnitude <= 4.0f)
                 {
-                    body.ApplyForce(direction.normalized * (4.0f - direction.magnitude), PhysicsBody.eForceMode.IMPULSE);
+                    body.ApplyForce(direction.normalized * (4.0f - direction.magnitude), PhysicsBody.eForceMode.ACCELERATION);
                 }
             }
-
-            Camera.main.backgroundColor = Color.HSVToRGB(Random.value, 1, 1);
         }
     }
 }
