@@ -619,9 +619,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1179599411}
+  - component: {fileID: 1179599413}
   - component: {fileID: 1179599412}
   m_Layer: 5
-  m_Name: Slider
+  m_Name: Damping
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -693,12 +694,30 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1521683939}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 1
+  m_MaxValue: 2
   m_WholeNumbers: 0
-  m_Value: 1
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1179599413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1179599410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37f71032c7b3bcc48a2bbc318085f368, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_slider: {fileID: 1179599412}
+  m_textLabel: {fileID: 234624340}
+  m_textValue: {fileID: 1070932469}
+  m_min: 0
+  m_max: 2
+  m_value: {fileID: 11400000, guid: aa59a93c0b0ebb84e8695600f57f717e, type: 2}
 --- !u!1 &1235876399
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,7 +763,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1247287019}
-  - component: {fileID: 1247287022}
   - component: {fileID: 1247287021}
   - component: {fileID: 1247287020}
   m_Layer: 5
@@ -790,7 +808,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.392}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -812,24 +830,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1247287018}
   m_CullTransparentMesh: 0
---- !u!114 &1247287022
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1247287018}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37f71032c7b3bcc48a2bbc318085f368, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_slider: {fileID: 1179599412}
-  m_label: {fileID: 234624340}
-  m_textValue: {fileID: 1070932469}
-  m_min: 0
-  m_max: 1
-  m_value: {fileID: 11400000, guid: aa59a93c0b0ebb84e8695600f57f717e, type: 2}
 --- !u!1 &1334528217
 GameObject:
   m_ObjectHideFlags: 0
