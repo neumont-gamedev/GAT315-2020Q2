@@ -17,6 +17,7 @@ public class PhysicsBody : MonoBehaviour
 	public Vector2 force { get; set; } = Vector2.zero;
 	public Vector2 acceleration { get; set; } = Vector2.zero;
 	public Vector2 velocity { get; set; } = Vector2.zero;
+	public float damping { get; set; } = 1.0f;
 	public float mass { get; set; } = 1.0f;
 	public float gravityScale { get; set; } = 0.0f;
 
@@ -43,9 +44,11 @@ public class PhysicsBody : MonoBehaviour
 
 	public void Step(float dt)
 	{
-		acceleration = (PhysicsWorld.gravity * gravityScale) + (force / mass);
+		acceleration = acceleration + (PhysicsWorld.gravity * gravityScale) + (force / mass);
 
 		velocity = velocity + acceleration * dt;
 		position = position + velocity * dt;
+
+		velocity = velocity * 1.0f / (1.0f + dt * damping);
 	}
 }

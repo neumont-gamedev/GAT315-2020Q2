@@ -22,5 +22,6 @@ public class PhysicsWorld : MonoBehaviour
         }
 
         bodies.ForEach(body => body.force = Vector2.zero);
+        bodies.ForEach(body => body.acceleration = Vector2.zero);
     }
 }
