@@ -5,6 +5,7 @@ using UnityEngine;
 public class PhysicsWorld : MonoBehaviour
 {
     [SerializeField] FloatRef m_gravity = null;
+    [SerializeField] BoolRef m_simulate = null;
 
     [HideInInspector] public List<PhysicsBody> bodies = new List<PhysicsBody>();
     
@@ -17,7 +18,7 @@ public class PhysicsWorld : MonoBehaviour
     {
         gravity = new Vector2(0.0f, m_gravity.value);
 
-        timeAccumulator = timeAccumulator + Time.deltaTime;
+        timeAccumulator = (m_simulate.value) ? timeAccumulator + Time.deltaTime : 0;
         while (timeAccumulator > fixedTimeStep)
         {
             bodies.ForEach(body => body.Step(fixedTimeStep));

@@ -12,15 +12,16 @@ public class PhysicsBody : MonoBehaviour
 		FORCE
 	}
 
-	public Vector2 position { get { return transform.position; } set { transform.position = value; } }
+	[SerializeField] Shape m_shape = null;
 
+	public Vector2 position { get { return transform.position; } set { transform.position = value; } }
 	public Vector2 force { get; set; } = Vector2.zero;
 	public Vector2 acceleration { get; set; } = Vector2.zero;
 	public Vector2 velocity { get; set; } = Vector2.zero;
 	public float damping { get; set; } = 1.0f;
 	public float mass { get; set; } = 1.0f;
 	public float gravityScale { get; set; } = 1.0f;
-	public float damping { get; set; } = 2.0f;
+	public Shape shape { get => m_shape; set => m_shape = value; }
 
 	public void ApplyForce(Vector2 force, eForceMode mode)
 	{
