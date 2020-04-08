@@ -8,4 +8,5 @@ public class FloatRef : ScriptableObject
 	[SerializeField] float m_value;
 
 	public float value { get => m_value; set => m_value = value; }
+	public static implicit operator float (FloatRef v) { return v.m_value; }
 }

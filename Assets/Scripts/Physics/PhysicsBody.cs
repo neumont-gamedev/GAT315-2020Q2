@@ -20,7 +20,6 @@ public class PhysicsBody : MonoBehaviour
 	public float damping { get; set; } = 1.0f;
 	public float mass { get; set; } = 1.0f;
 	public float gravityScale { get; set; } = 1.0f;
-	public float damping { get; set; } = 2.0f;
 
 	public void ApplyForce(Vector2 force, eForceMode mode)
 	{

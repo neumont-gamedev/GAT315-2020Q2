@@ -6,15 +6,20 @@ public class Creator : MonoBehaviour
 {
     [SerializeField] GameObject m_gameObject = null;
     [SerializeField] PhysicsWorld m_physicsWorld = null;
+    [SerializeField] FloatRef m_damping = null;
+    [SerializeField] FloatRef m_velocity = null;
+
+    public bool active { get; set; } = false;
 
     void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (active)
         {
             Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             GameObject go = Instantiate(m_gameObject, position, Quaternion.identity);
             PhysicsBody body = go.GetComponent<PhysicsBody>();
-            body.ApplyForce(Random.insideUnitCircle.normalized * 4.0f, PhysicsBody.eForceMode.VELOCITY);
+            body.ApplyForce(Random.insideUnitCircle.normalized * m_velocity.value, PhysicsBody.eForceMode.VELOCITY);
+            body.damping = m_damping;
 
             m_physicsWorld.bodies.Add(body);
         }
@@ -33,5 +38,17 @@ public class Creator : MonoBehaviour
 
             //Camera.main.backgroundColor = Color.HSVToRGB(Random.value, 1, 1);
         }
+    }
+
+    public void StartEvent()
+    {
+        Debug.Log("start");
+        active = true;
+    }
+
+    public void StopEvent()
+    {
+        active = false;
+        Debug.Log("stop");
     }
 }
