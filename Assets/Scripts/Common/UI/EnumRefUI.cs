@@ -21,6 +21,12 @@ public class EnumRefUI : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        m_dropdown.value = m_enumType.index;
+        m_dropdown.onValueChanged.AddListener(IndexChanged);
+    }
+
     public void IndexChanged(int index)
     {
         m_enumType.index = index;

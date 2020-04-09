@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02cebb574820b534290ad04b7bbc2221, type: 3}
   m_Name: Emission
   m_EditorClassIdentifier: 
-  m_type: 2
+  m_type: 1

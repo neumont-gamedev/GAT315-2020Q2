@@ -42,13 +42,11 @@ public class Creator : MonoBehaviour
 
     public void StartEvent()
     {
-        Debug.Log("start");
         active = true;
     }
 
     public void StopEvent()
     {
         active = false;
-        Debug.Log("stop");
     }
 }

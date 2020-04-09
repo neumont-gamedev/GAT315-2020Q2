@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c1c0f58e129d64ab8db91818fb9e2a, type: 3}
   m_Name: Velocity
   m_EditorClassIdentifier: 
-  m_value: 0
+  m_value: 3

@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class ActionController : MonoBehaviour
 {
-    [SerializeField] Action m_action = null;
+    [SerializeField] Action[] m_actions = null;
+    [SerializeField] ActionEnumRef m_action = null;
 
     public void StartEvent()
     {
-        m_action.StartEvent();
+        m_actions[m_action.index].StartEvent();
     }
 
     public void StopEvent()
     {
-        m_action.StopEvent();
+        m_actions[m_action.index].StopEvent();
     }
 }

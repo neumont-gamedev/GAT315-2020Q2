@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 897bdd392becb7d49a7bf0d26c0d424d, type: 3}
   m_Name: Simulate
   m_EditorClassIdentifier: 
-  m_value: 0
+  m_value: 1
