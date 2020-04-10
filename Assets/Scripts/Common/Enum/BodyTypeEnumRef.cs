@@ -3,15 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Action", menuName = "Variables/Enum/Action")]
-public class ActionEnumRef : EnumRef
+[CreateAssetMenu(fileName = "BodyType", menuName = "Variables/Enum/BodyType")]
+public class BodyTypeEnumRef : EnumRef
 {
 	public enum	eType
 	{
-		Create,
-		Delete,
-		Select,
-		Joint
+		Static,
+		Dynamic,
+		Kinematic
 	}
 	[SerializeField] eType m_type;
 

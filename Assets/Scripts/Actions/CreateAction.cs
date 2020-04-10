@@ -8,8 +8,10 @@ public class CreateAction : Action
 
 	[SerializeField] EmissionEnumRef m_emission = null;
 	[SerializeField] FloatRef m_velocity = null;
-		
-	bool active { get; set; } = false;
+
+	[SerializeField] BodyTypeEnumRef m_bodyType = null;
+	[SerializeField] FloatRef m_damping = null;
+
 	float timer { get; set; } = 0.0f;
 
 	private void Update()
@@ -61,6 +63,9 @@ public class CreateAction : Action
 	{
 		GameObject go = Instantiate(m_gameObject, position, Quaternion.identity);
 		PhysicsBody body = go.GetComponent<PhysicsBody>();
+
+		body.type = m_bodyType.type;
+		body.damping = m_damping.value;
 		body.ApplyForce(velocity, PhysicsBody.eForceMode.VELOCITY);
 
 		m_physicsWorld.bodies.Add(body);
