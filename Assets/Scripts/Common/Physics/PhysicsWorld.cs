@@ -26,9 +26,23 @@ public class PhysicsWorld : MonoBehaviour
         timeAccumulator = (m_simulate.value) ? timeAccumulator + Time.deltaTime : 0;
         while (timeAccumulator > fixedTimeStep)
         {
-            
             bodies.ForEach(body => body.Step(fixedTimeStep));
             bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedTimeStep));
+
+
+            // check collision
+            bodies.ForEach(body => body.shape.color = Color.white);
+            for (int i = 0; i < bodies.Count; i++)
+            {
+                for (int j = i + 1; j < bodies.Count; j++)
+                {
+                    if (Collision.TestOverlap(bodies[i].shape, bodies[i].position, bodies[j].shape, bodies[j].position))
+                    {
+                        bodies[i].shape.color = Color.red;
+                        bodies[j].shape.color = Color.red;
+                    }
+                }
+            }
 
             timeAccumulator = timeAccumulator - fixedTimeStep;
         }

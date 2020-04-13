@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class CircleShape : Shape
 {
-    float m_radius;
-
-    public float radius { get { return m_radius; } set { m_radius = value; transform.localScale = Vector2.one * value; } }
+    public float radius { get { return transform.localScale.magnitude * 0.1f; } set { transform.localScale = Vector2.one * value; } }
     public override eType type => eType.CIRCLE;
 
     public override float ComputeMass(float density)
