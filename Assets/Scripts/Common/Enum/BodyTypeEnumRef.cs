@@ -19,5 +19,4 @@ public class BodyTypeEnumRef : EnumRef
 	public override string id { get { return type.ToString(); } }
 	public override int index { get { return (int)type; } set { type = (eType)value; } }
 	public override string[] names { get { return Enum.GetNames(typeof(eType)); } }
-
 }

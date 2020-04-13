@@ -6,6 +6,7 @@ public class CreateAction : Action
 {
 	[SerializeField] GameObject m_gameObject = null;
 
+	[SerializeField] BodyTypeEnumRef m_bodyType = null;
 	[SerializeField] EmissionEnumRef m_emission = null;
 	[SerializeField] FloatRef m_velocity = null;
 
@@ -65,7 +66,6 @@ public class CreateAction : Action
 		PhysicsBody body = go.GetComponent<PhysicsBody>();
 
 		body.type = m_bodyType.type;
-		body.damping = m_damping.value;
 		body.ApplyForce(velocity, PhysicsBody.eForceMode.VELOCITY);
 
 		m_physicsWorld.bodies.Add(body);

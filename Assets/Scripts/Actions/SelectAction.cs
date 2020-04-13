@@ -10,11 +10,10 @@ public class SelectAction : Action
 
 	private void Update()
 	{
-		m_lineRenderer.enabled = active;
+		m_lineRenderer.enabled = (bodySelect != null);
 		if (bodySelect != null)
 		{
 			Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
 			m_lineRenderer.SetPosition(0, bodySelect.position);
 			m_lineRenderer.SetPosition(1, position);
 
@@ -29,20 +28,15 @@ public class SelectAction : Action
 			}
 		}
 	}
-
+	
 	public override void StartEvent()
 	{
-		PhysicsBody body = PhysicsWorld.GetPhysicsBodyFromPosition(Input.mousePosition);
-		if (body != null)
-		{
-			bodySelect = body;
-			active = true;
-		}
+		bodySelect = PhysicsWorld.GetPhysicsBodyFromPosition(Input.mousePosition);
+		Debug.Log(bodySelect);
 	}
 
 	public override void StopEvent()
 	{
 		bodySelect = null;
-		active = false;
 	}
 }

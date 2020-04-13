@@ -9,8 +9,8 @@ public class ActionEnumRef : EnumRef
 	public enum	eType
 	{
 		Create,
-		Delete,
 		Select,
+		Delete,
 		Joint
 	}
 	[SerializeField] eType m_type;
