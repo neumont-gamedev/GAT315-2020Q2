@@ -14,6 +14,7 @@ public class PhysicsBody : MonoBehaviour
 
 	[SerializeField] Shape m_shape = null;
 
+	public BodyTypeEnumRef.eType type { get; set; } = BodyTypeEnumRef.eType.Dynamic;
 	public Vector2 position { get { return transform.position; } set { transform.position = value; } }
 	public Vector2 force { get; set; } = Vector2.zero;
 	public Vector2 acceleration { get; set; } = Vector2.zero;
@@ -25,6 +26,8 @@ public class PhysicsBody : MonoBehaviour
 
 	public void ApplyForce(Vector2 force, eForceMode mode)
 	{
+		if (type != BodyTypeEnumRef.eType.Dynamic) return;
+
 		switch (mode)
 		{
 			case eForceMode.ACCELERATION:
@@ -46,6 +49,8 @@ public class PhysicsBody : MonoBehaviour
 
 	public void Step(float dt)
 	{
+		if (type != BodyTypeEnumRef.eType.Dynamic) return;
+
 		acceleration = acceleration + (PhysicsWorld.gravity * gravityScale) + (force / mass);
 	}
 }

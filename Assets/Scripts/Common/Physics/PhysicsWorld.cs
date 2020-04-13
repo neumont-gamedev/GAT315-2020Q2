@@ -32,4 +32,18 @@ public class PhysicsWorld : MonoBehaviour
         bodies.ForEach(body => body.force = Vector2.zero);
         bodies.ForEach(body => body.acceleration = Vector2.zero);
     }
+
+    public static PhysicsBody GetPhysicsBodyFromPosition(Vector2 position)
+    {
+        PhysicsBody body = null;
+
+        Ray ray = Camera.main.ScreenPointToRay(position);
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+        if (hit.collider)
+        {
+            body = hit.collider.gameObject.GetComponent<PhysicsBody>();
+        }
+
+        return body;
+    }
 }
