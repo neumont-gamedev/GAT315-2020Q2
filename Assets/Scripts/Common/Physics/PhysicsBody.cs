@@ -20,7 +20,7 @@ public class PhysicsBody : MonoBehaviour
 	public Vector2 acceleration { get; set; } = Vector2.zero;
 	public Vector2 velocity { get; set; } = Vector2.zero;
 	public float damping { get; set; } = 1.0f;
-	public float mass { get; set; } = 1.0f;
+	public float mass { get; set; } = 3.0f;
 	public float gravityScale { get; set; } = 1.0f;
 	public Shape shape { get => m_shape; set => m_shape = value; }
 

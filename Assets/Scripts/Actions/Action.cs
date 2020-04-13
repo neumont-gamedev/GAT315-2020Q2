@@ -6,6 +6,8 @@ public abstract class Action : MonoBehaviour
 {
 	[SerializeField] protected PhysicsWorld m_physicsWorld = null;
 
+	public bool active { get; set; } = false;
+
 	public abstract void StartEvent();
 	public abstract void StopEvent();
 }

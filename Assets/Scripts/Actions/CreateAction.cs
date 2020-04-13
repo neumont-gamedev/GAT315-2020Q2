@@ -9,8 +9,10 @@ public class CreateAction : Action
 	[SerializeField] BodyTypeEnumRef m_bodyType = null;
 	[SerializeField] EmissionEnumRef m_emission = null;
 	[SerializeField] FloatRef m_velocity = null;
-		
-	bool active { get; set; } = false;
+
+	[SerializeField] BodyTypeEnumRef m_bodyType = null;
+	[SerializeField] FloatRef m_damping = null;
+
 	float timer { get; set; } = 0.0f;
 
 	private void Update()

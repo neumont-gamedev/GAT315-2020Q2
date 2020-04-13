@@ -9,7 +9,8 @@ public class PhysicsWorld : MonoBehaviour
     [SerializeField] BoolRef m_simulate = null;
 
     [HideInInspector] public List<PhysicsBody> bodies = new List<PhysicsBody>();
-    
+    [HideInInspector] public List<PhysicsJoint> joints = new List<PhysicsJoint>();
+
     static public Vector2 gravity { get; set; } = new Vector2(0, -9.81f);
     static public float fixedTimeStep { get; set; } = (1.0f / 60.0f);
 
@@ -20,14 +21,18 @@ public class PhysicsWorld : MonoBehaviour
         gravity = new Vector2(0.0f, m_gravity.value);
         fixedTimeStep = 1.0f / m_fps.value;
 
+        joints.ForEach(joint => joint.ApplyForce(fixedTimeStep));
+
         timeAccumulator = (m_simulate.value) ? timeAccumulator + Time.deltaTime : 0;
         while (timeAccumulator > fixedTimeStep)
         {
+            
             bodies.ForEach(body => body.Step(fixedTimeStep));
             bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedTimeStep));
 
             timeAccumulator = timeAccumulator - fixedTimeStep;
         }
+        joints.ForEach(joint => joint.DebugDraw());
 
         bodies.ForEach(body => body.force = Vector2.zero);
         bodies.ForEach(body => body.acceleration = Vector2.zero);
