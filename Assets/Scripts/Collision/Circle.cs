@@ -21,30 +21,4 @@ public struct Circle
 
 		return (sqrDistance <= sqrRadius);
 	}
-
-	public void Expand(Circle circle)
-	{
-		Vector2 dv = center - circle.center;
-		float distance = dv.sqrMagnitude;
-
-		float dr = radius - circle.radius;
-		// larger sphere fully encloses the other sphere
-		if (distance <= (dr * dr))
-		{
-			center = (radius > circle.radius) ? center : circle.center;
-			radius = (radius > circle.radius) ? radius : circle.radius;
-		}
-		else
-		{
-			distance = dv.magnitude;
-			float maxRadius = (distance + radius + circle.radius) * 0.5f;
-			if (distance  > float.Epsilon)
-			{
-				center = center + ((maxRadius - radius) / distance) * dv;
-			}
-		}
-	}
-
-		return (distance <= ((this.radius * this.radius) + (circle.radius * circle.radius)));
-	}
 }

@@ -10,7 +10,6 @@ public class CreateAction : Action
 	[SerializeField] EmissionEnumRef m_emission = null;
 	[SerializeField] FloatRef m_velocity = null;
 
-	[SerializeField] BodyTypeEnumRef m_bodyType = null;
 	[SerializeField] FloatRef m_damping = null;
 	[SerializeField] FloatRef m_size = null;
 
@@ -69,6 +68,7 @@ public class CreateAction : Action
 		body.type = m_bodyType.type;
 		body.damping = m_damping.value;
 		((CircleShape)body.shape).radius = m_size.value;
+		body.mass = body.shape.ComputeMass(2.0f);
 		body.ApplyForce(velocity, PhysicsBody.eForceMode.VELOCITY);
 
 		m_physicsWorld.bodies.Add(body);
