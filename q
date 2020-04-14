@@ -1,0 +1,27 @@
+[33m7d72cd6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{0}: reset: moving to HEAD@{1}
+[33m7d72cd6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{1}: reset: moving to head
+[33m7d72cd6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{2}: reset: moving to 7d72cd6be538973a56ff4bdbcce0fae0acc54712
+[33mbeb78c1[m[33m ([m[1;31morigin/master[m[33m)[m HEAD@{3}: commit: springs complete
+[33md750df6[m HEAD@{4}: commit: editor assignment
+[33m8aac69c[m HEAD@{5}: commit (merge): Merge branch 'master' of https://github.com/neumont-gamedev/GAT315-GamePhysics
+[33m7d72cd6[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m)[m HEAD@{6}: commit: class 040820
+[33m89a5837[m HEAD@{7}: reset: moving to 89a5837
+[33mdb8ba39[m HEAD@{8}: commit: Update Physics.unity
+[33m776d8a6[m HEAD@{9}: commit: ui
+[33m89a5837[m HEAD@{10}: commit (merge): Merge branch 'master' of https://github.com/neumont-gamedev/GAT315-GamePhysics
+[33m96cf62b[m HEAD@{11}: commit: class0406
+[33mac426d3[m HEAD@{12}: reset: moving to ac426d3
+[33m6cee1ec[m HEAD@{13}: pull --progress origin: Merge made by the 'recursive' strategy.
+[33m036d9ac[m HEAD@{14}: commit: git work
+[33mac426d3[m HEAD@{15}: reset: moving to ac426d3
+[33mac426d3[m HEAD@{16}: reset: moving to ac426d3
+[33ma8a5b23[m HEAD@{17}: revert: Revert "Merge branch 'master' of https://github.com/neumont-gamedev/GAT315-GamePhysics"
+[33m8877e5b[m HEAD@{18}: commit: Update Physics.unity
+[33mc3c35d8[m HEAD@{19}: commit: damping and ref
+[33mac426d3[m HEAD@{20}: pull --progress origin: Merge made by the 'recursive' strategy.
+[33m8b9a8f9[m HEAD@{21}: commit: add repository to github
+[33mc88e743[m HEAD@{22}: commit: add repository to github
+[33mf595544[m HEAD@{23}: commit: remove world class
+[33mb2fe7ae[m HEAD@{24}: commit: Forces and mass
+[33ma15ddbb[m HEAD@{25}: commit: initial commit
+[33m859990a[m HEAD@{26}: commit (initial): Initial commit

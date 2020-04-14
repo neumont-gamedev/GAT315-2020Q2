@@ -6,6 +6,7 @@ public class CreateAction : Action
 {
 	[SerializeField] GameObject m_gameObject = null;
 
+	[SerializeField] BodyTypeEnumRef m_bodyType = null;
 	[SerializeField] EmissionEnumRef m_emission = null;
 	[SerializeField] FloatRef m_velocity = null;
 
