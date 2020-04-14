@@ -13,14 +13,6 @@ public struct Circle
 		this.radius = radius;
 	}
 
-	public bool Contains(Vector2 point)
-	{
-		Vector3 dv = center - point;
-		float distance = dv.sqrMagnitude;
-
-		return (distance <= (radius * radius));
-	}
-
 	public bool Contains(Circle circle)
 	{
 		Vector3 dv = center - circle.center;
@@ -53,13 +45,6 @@ public struct Circle
 		}
 	}
 
-	public void ConvertTo(ref AABB aabb)
-	{
-		aabb.SetMinMax(center - new Vector2(radius, radius), center + new Vector2(radius, radius));
-	}
-
-	public static bool Intersects(Circle circleA, Circle circleB)
-	{
-		return circleA.Contains(circleB);
+		return (distance <= ((this.radius * this.radius) + (circle.radius * circle.radius)));
 	}
 }

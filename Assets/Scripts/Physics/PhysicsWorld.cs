@@ -29,7 +29,6 @@ public class PhysicsWorld : MonoBehaviour
             bodies.ForEach(body => body.Step(fixedTimeStep));
             bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedTimeStep));
 
-
             // check collision
             bodies.ForEach(body => body.shape.color = Color.white);
             for (int i = 0; i < bodies.Count; i++)

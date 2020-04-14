@@ -10,7 +10,7 @@ public class CircleShape : Shape
 
     public override float ComputeMass(float density)
     {
-        return density * (Mathf.PI * (radius * radius));
+        return (Mathf.PI * (radius * radius)) * density;
     }
 
     private void Update()
