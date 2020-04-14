@@ -24,9 +24,10 @@ public struct Circle
 	public bool Contains(Circle circle)
 	{
 		Vector3 dv = center - circle.center;
-		float distance = dv.sqrMagnitude;
+		float sqrDistance = dv.sqrMagnitude;
+		float sqrRadius = ((radius * radius) + (circle.radius * circle.radius));
 
-		return (distance <= ((radius * radius) + (circle.radius * circle.radius)));
+		return (sqrDistance <= sqrRadius);
 	}
 
 	public void Expand(Circle circle)

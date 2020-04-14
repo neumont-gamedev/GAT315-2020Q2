@@ -11,6 +11,7 @@ public class CreateAction : Action
 
 	[SerializeField] BodyTypeEnumRef m_bodyType = null;
 	[SerializeField] FloatRef m_damping = null;
+	[SerializeField] FloatRef m_size = null;
 
 	float timer { get; set; } = 0.0f;
 
@@ -66,6 +67,7 @@ public class CreateAction : Action
 
 		body.type = m_bodyType.type;
 		body.damping = m_damping.value;
+		((CircleShape)body.shape).radius = m_size.value;
 		body.ApplyForce(velocity, PhysicsBody.eForceMode.VELOCITY);
 
 		m_physicsWorld.bodies.Add(body);

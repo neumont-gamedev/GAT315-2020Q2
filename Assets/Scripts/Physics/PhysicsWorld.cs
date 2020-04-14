@@ -65,4 +65,14 @@ public class PhysicsWorld : MonoBehaviour
 
         return body;
     }
+
+    public static Vector2 screenWorldSize
+    {
+        get
+        {
+            Vector2 topRightCorner = new Vector2(1, 1);
+            Vector2 screenSize = Camera.main.ViewportToWorldPoint(topRightCorner) * 2.0f;
+            return screenSize;
+        }
+    }
 }
