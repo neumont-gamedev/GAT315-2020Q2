@@ -30,18 +30,11 @@ public class PhysicsWorld : MonoBehaviour
             bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedTimeStep));
 
             // check collision
-            bodies.ForEach(body => body.shape.color = Color.white);
-            for (int i = 0; i < bodies.Count; i++)
-            {
-                for (int j = i + 1; j < bodies.Count; j++)
-                {
-                    if (Collision.TestOverlap(bodies[i].shape, bodies[i].position, bodies[j].shape, bodies[j].position))
-                    {
-                        bodies[i].shape.color = Color.red;
-                        bodies[j].shape.color = Color.red;
-                    }
-                }
-            }
+            bodies.ForEach(body => body.isTouching = false);
+            Collision.CreateContacts(ref bodies, out List<Contact> contacts);
+            contacts.ForEach(contact => contact.bodyA.isTouching = true);
+            contacts.ForEach(contact => contact.bodyB.isTouching = true);
+            ContactSolver.Resolve(ref contacts);
 
             timeAccumulator = timeAccumulator - fixedTimeStep;
         }

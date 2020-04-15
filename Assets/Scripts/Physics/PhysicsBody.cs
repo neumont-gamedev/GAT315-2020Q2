@@ -21,8 +21,10 @@ public class PhysicsBody : MonoBehaviour
 	public Vector2 velocity { get; set; } = Vector2.zero;
 	public float damping { get; set; } = 1.0f;
 	public float mass { get; set; } = 3.0f;
+	public float inverseMass { get { return (mass == 0) ? 0 : 1.0f / mass; } }
 	public float gravityScale { get; set; } = 1.0f;
 	public Shape shape { get => m_shape; set => m_shape = value; }
+	public bool isTouching { get; set; } = false;
 
 	public void ApplyForce(Vector2 force, eForceMode mode)
 	{
@@ -49,6 +51,8 @@ public class PhysicsBody : MonoBehaviour
 
 	public void Step(float dt)
 	{
+		//shape.color = (isTouching) ? Color.red : Color.white;
+
 		if (type != BodyTypeEnumRef.eType.Dynamic) return;
 
 		acceleration = acceleration + (PhysicsWorld.gravity * gravityScale) + (force / mass);

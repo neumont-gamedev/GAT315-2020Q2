@@ -13,4 +13,37 @@ public static class Collision
 
 		return intersects;
 	}
+
+	public static void CreateContacts(ref List<PhysicsBody> bodies, out List<Contact> contacts)
+	{
+		contacts = new List<Contact>();
+		for (int i = 0; i < bodies.Count; i++)
+		{
+			for (int j = i + 1; j < bodies.Count; j++)
+			{
+				if (Collision.TestOverlap(bodies[i].shape, bodies[i].position, bodies[j].shape, bodies[j].position))
+				{
+					Contact contact = new Contact();
+					contact.bodyA = bodies[i];
+					contact.bodyB = bodies[j];
+
+					CreateCircleManifold(ref contact.manifold, contact.bodyA.position, ((CircleShape)(contact.bodyA.shape)).radius, contact.bodyB.position, ((CircleShape)(contact.bodyB.shape)).radius);
+
+					contacts.Add(contact);
+				}
+			}
+		}
+	}
+
+	public static void CreateCircleManifold(ref Manifold manifold, Vector2 positionA, float radiusA, Vector2 positionB, float radiusB)
+	{
+		manifold.normal = Vector2.right;
+
+		float distance = (positionA - positionB).magnitude;
+		if (distance >= Mathf.Epsilon)
+		{
+			manifold.normal = (positionA - positionB).normalized;
+		}
+		manifold.depth = Mathf.Abs(distance - (radiusA + radiusB));
+	}
 }
