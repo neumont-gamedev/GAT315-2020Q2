@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8139674285727928574}
   - component: {fileID: 4465126502948559871}
   - component: {fileID: 7523162267114508040}
-  - component: {fileID: 1973051935393570925}
+  - component: {fileID: 7381707826492327107}
   m_Layer: 0
   m_Name: Circle
   m_TagString: Untagged
@@ -98,7 +98,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: eb4a92e7e3a4b3b4ca81d67f14e43cb0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -109,7 +109,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1973051935393570925
+--- !u!58 &7381707826492327107
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -124,4 +124,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.1
+  m_Radius: 0.5

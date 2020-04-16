@@ -20,7 +20,7 @@ public class SelectAction : Action
 			if (bodySelect.type == BodyTypeEnumRef.eType.Dynamic)
 			{
 				Vector2 force = PhysicsSpringJoint.SpringForce(position, bodySelect.position, 0.01f, 30.0f);
-				bodySelect.ApplyForce(force, PhysicsBody.eForceMode.IMPULSE);
+				bodySelect.ApplyForce(force, PhysicsBody.eForceMode.ACCELERATION);
 			}
 			else
 			{

@@ -17,7 +17,7 @@ public struct Circle
 	{
 		Vector3 dv = center - circle.center;
 		float sqrDistance = dv.sqrMagnitude;
-		float sqrRadius = ((radius * radius) + (circle.radius * circle.radius));
+		float sqrRadius = ((radius + circle.radius) * (radius + circle.radius));
 
 		return (sqrDistance <= sqrRadius);
 	}
