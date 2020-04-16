@@ -32,7 +32,6 @@ public class SelectAction : Action
 	public override void StartEvent()
 	{
 		bodySelect = PhysicsWorld.GetPhysicsBodyFromPosition(Input.mousePosition);
-		Debug.Log(bodySelect);
 	}
 
 	public override void StopEvent()

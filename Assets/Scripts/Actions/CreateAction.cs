@@ -69,7 +69,7 @@ public class CreateAction : Action
 		body.type = m_bodyType.type;
 		body.damping = m_damping.value;
 		((CircleShape)body.shape).radius = m_size.value;
-		body.mass = (body.type == BodyTypeEnumRef.eType.Static) ? 0 : 1.0f;// body.shape.ComputeMass(2.0f);
+		body.mass = (body.type == BodyTypeEnumRef.eType.Static) ? 0.0f : body.shape.ComputeMass(2.0f);
 		body.ApplyForce(velocity, PhysicsBody.eForceMode.VELOCITY);
 
 		m_physicsWorld.bodies.Add(body);

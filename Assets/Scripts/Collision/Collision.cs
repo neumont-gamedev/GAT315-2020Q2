@@ -17,7 +17,6 @@ public static class Collision
 	public static void CreateContacts(ref List<PhysicsBody> bodies, out List<Contact> contacts)
 	{
 		contacts = new List<Contact>();
-
 		for (int i = 0; i < bodies.Count; i++)
 		{
 			for (int j = i + 1; j < bodies.Count; j++)
