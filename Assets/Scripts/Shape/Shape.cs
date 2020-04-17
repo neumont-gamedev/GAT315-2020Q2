@@ -13,7 +13,6 @@ public abstract class Shape : MonoBehaviour
 	public abstract eType type { get; }
 	public float density { get; set; } = 1.0f;
 	public Color color { get { return m_spriteRenderer.material.color; } set { m_spriteRenderer.color = value; } }
-	public Vector2 size {  get { return m_spriteRenderer.bounds.size; } }
 
 	public abstract float ComputeMass(float density);
 

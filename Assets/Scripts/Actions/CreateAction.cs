@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class CreateAction : Action
 {
-	[SerializeField] GameObject m_gameObject = null;
+	[SerializeField] GameObject[] m_gameObject = null;
 
 	[SerializeField] BodyTypeEnumRef m_bodyType = null;
+	[SerializeField] ShapeEnumRef m_shapeType = null;
 	[SerializeField] EmissionEnumRef m_emission = null;
 	[SerializeField] FloatRef m_velocity = null;
 
@@ -63,12 +64,20 @@ public class CreateAction : Action
 
 	void Create(Vector2 position, Vector2 velocity)
 	{
-		GameObject go = Instantiate(m_gameObject, position, Quaternion.identity);
+		GameObject go = Instantiate(m_gameObject[m_shapeType.index], position, Quaternion.identity);
 		PhysicsBody body = go.GetComponent<PhysicsBody>();
 
 		body.type = m_bodyType.type;
 		body.damping = m_damping.value;
-		((CircleShape)body.shape).radius = m_size.value;
+
+		if (body.shape.type == Shape.eType.CIRCLE)
+		{
+			((CircleShape)body.shape).radius = m_size.value;
+		}
+		else
+		{
+			((BoxShape)body.shape).size = new Vector2(m_size.value, m_size.value);
+		}
 		body.mass = (body.type == BodyTypeEnumRef.eType.Static) ? 0.0f : body.shape.ComputeMass(1.0f);
 		body.ApplyForce(velocity, PhysicsBody.eForceMode.VELOCITY);
 

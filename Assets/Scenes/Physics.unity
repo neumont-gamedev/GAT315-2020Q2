@@ -1071,9 +1071,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_physicsWorld: {fileID: 268965971}
-  m_gameObject: {fileID: 7523162267114508047, guid: 5f4f6ca3741a42b41b490cc72d90cdd5,
-    type: 3}
+  m_gameObject:
+  - {fileID: 7523162267114508047, guid: 5f4f6ca3741a42b41b490cc72d90cdd5, type: 3}
+  - {fileID: 7435020804561254286, guid: e694e25e3c9ed094fb4a19cd15800a56, type: 3}
   m_bodyType: {fileID: 11400000, guid: 61b4557e949a26f4f8886640757f2f0a, type: 2}
+  m_shapeType: {fileID: 11400000, guid: 8a7595ee57fa5374797b79730c9e0da2, type: 2}
   m_emission: {fileID: 11400000, guid: 37c7e79c07d4e254592a9c676588aa25, type: 2}
   m_velocity: {fileID: 11400000, guid: 365266bde46ff744d9677b4220fa955d, type: 2}
   m_damping: {fileID: 11400000, guid: aa59a93c0b0ebb84e8695600f57f717e, type: 2}
