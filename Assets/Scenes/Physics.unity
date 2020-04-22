@@ -137,6 +137,7 @@ GameObject:
   m_Component:
   - component: {fileID: 268965970}
   - component: {fileID: 268965971}
+  - component: {fileID: 268965969}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -144,6 +145,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &268965969
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 268965968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1f34d6bb4d7d0d45a75391f87f2e0bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_vectorField: {fileID: 11400000, guid: a77b64c0cec2f5c4692d4d1fc99e5841, type: 2}
+  m_drawGrid: 0
+  m_drawForces: 1
 --- !u!4 &268965970
 Transform:
   m_ObjectHideFlags: 0
@@ -173,6 +189,7 @@ MonoBehaviour:
   m_gravity: {fileID: 11400000, guid: 9d9f576adbb6d604bb7c8a42c34b68bb, type: 2}
   m_fps: {fileID: 11400000, guid: 4e3d656e4d07450489c762a703d69db6, type: 2}
   m_simulate: {fileID: 11400000, guid: 122c512fe17965442b859f3403d38364, type: 2}
+  m_vectorField: {fileID: 268965969}
   bodies: []
 --- !u!1 &519420028
 GameObject:

@@ -29,6 +29,27 @@ public struct AABB
 			   (point.y >= min.y && point.y <= max.y);
 	}
 
+	public bool Contains(Circle circle)
+	{
+		Vector2 v = circle.center - center;
+
+		// closest point on AABB to center of Circle
+		Vector2 closest = v;
+
+		// clamp point to edges of the AABB
+		closest.x = Mathf.Clamp(closest.x, -extents.x, extents.x);
+		closest.y = Mathf.Clamp(closest.y, -extents.y, extents.y);
+
+		// circle inside AABB
+		if (v == closest) return true;
+
+		Vector2 normal = v - closest;
+		float sqrDistance = normal.sqrMagnitude;
+		float sqrRadius = (circle.radius * circle.radius);
+		
+		return (sqrDistance < sqrRadius);
+	}
+
 	public void SetMinMax(Vector2 min, Vector2 max)
 	{
 		size = (max - min);

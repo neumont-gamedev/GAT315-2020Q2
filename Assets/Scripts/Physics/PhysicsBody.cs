@@ -51,7 +51,7 @@ public class PhysicsBody : MonoBehaviour
 
 	public void Step(float dt)
 	{
-		shape.color = (isTouching) ? Color.red : Color.white;
+		//shape.color = (isTouching) ? Color.red : Color.white;
 
 		if (type != BodyTypeEnumRef.eType.Dynamic) return;
 
