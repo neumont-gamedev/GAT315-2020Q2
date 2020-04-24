@@ -22,7 +22,7 @@ public class PhysicsWorld : MonoBehaviour
         gravity = new Vector2(0.0f, m_gravity.value);
         fixedTimeStep = 1.0f / m_fps.value;
 
-        bodies.ForEach(body => m_vectorField.ApplyForce(body));
+        //bodies.ForEach(body => m_vectorField.ApplyForce(body));
         joints.ForEach(joint => joint.ApplyForce(fixedTimeStep));
 
         timeAccumulator = (m_simulate.value) ? timeAccumulator + Time.deltaTime : 0;
@@ -43,8 +43,7 @@ public class PhysicsWorld : MonoBehaviour
 
         bodies.ForEach(body => body.force = Vector2.zero);
         bodies.ForEach(body => body.acceleration = Vector2.zero);
-
-        bodies.ForEach(body => body.position = WrapPosition(body.position));
+        bodies.ForEach(body => body.position = WrapWorld(body.position));
     }
 
     public static PhysicsBody GetPhysicsBodyFromPosition(Vector2 position)
@@ -61,19 +60,18 @@ public class PhysicsWorld : MonoBehaviour
         return body;
     }
 
-    static public Vector2 ScreenWorldSize
+    public static Vector2 ScreenWorldSize
     {
-        get
+        get 
         {
-            Vector2 topRightCorner = new Vector2(1, 1);
-            Vector2 screenSize = Camera.main.ViewportToWorldPoint(topRightCorner) * 2.0f;
-            return screenSize;
+            Vector2 worldSize = Camera.main.ViewportToWorldPoint(Vector2.one) * 2;
+            return worldSize;             
         }
     }
 
-    static public Vector2 WrapPosition(Vector2 position)
+    public static Vector2 WrapWorld(Vector2 position)
     {
-        AABB world = new AABB(Vector2.zero, ScreenWorldSize);
+        AABB world = new AABB(Vector2.zero, PhysicsWorld.ScreenWorldSize);
 
         if (position.x > world.max.x) position.x = world.min.x;
         if (position.x < world.min.x) position.x = world.max.x;

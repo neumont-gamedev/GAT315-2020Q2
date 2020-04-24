@@ -62,7 +62,6 @@ public static class Collision
 					{
 						CreateManifold(ref contact.manifold, contact.bodyA.position, ((CircleShape)contact.bodyA.shape).radius,
 										   contact.bodyB.position, ((BoxShape)contact.bodyB.shape).size);
-															 
 					}
 					else if (contact.bodyA.shape.type == Shape.eType.BOX && contact.bodyB.shape.type == Shape.eType.CIRCLE)
 					{
@@ -159,7 +158,7 @@ public static class Collision
 
 		// collision normal needs to be flipped to point outside if circle was
 		// inside the AABB
-		manifold.normal = (inside) ? -v.normalized : v.normalized;
+		manifold.normal = (inside) ? -normal.normalized : normal.normalized;
 		manifold.depth = Mathf.Abs(radiusB - distance);
 	}
 
@@ -203,7 +202,7 @@ public static class Collision
 
 		// collision normal needs to be flipped to point outside if circle was
 		// inside the AABB
-		manifold.normal = (inside) ? -v.normalized : v.normalized;
+		manifold.normal = (inside) ? -normal.normalized : normal.normalized;
 		manifold.depth = Mathf.Abs(radiusA - distance);
 	}
 }

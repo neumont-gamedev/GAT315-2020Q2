@@ -40,6 +40,8 @@ public struct AABB
 		closest.x = Mathf.Clamp(closest.x, -extents.x, extents.x);
 		closest.y = Mathf.Clamp(closest.y, -extents.y, extents.y);
 
+		//Debug.DrawLine(center + closest, circle.center, Color.red);
+
 		// circle inside AABB
 		if (v == closest) return true;
 

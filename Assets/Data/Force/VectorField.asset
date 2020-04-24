@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f66cb7872b28c624687f80fc1d5a0564, type: 3}
+  m_Script: {fileID: 11500000, guid: c01042c690531ec46b271c7ebb5f46e0, type: 3}
   m_Name: VectorField
   m_EditorClassIdentifier: 
   gridScale: 0.5
-  noiseOffset: 3.35
-  noiseScale: 0.055
-  force: 7
+  noiseOffset: 5.37
+  noiseScale: 0.05
+  force: 8.31

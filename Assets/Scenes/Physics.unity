@@ -154,12 +154,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 268965968}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1f34d6bb4d7d0d45a75391f87f2e0bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 50eeac7fc3438c74782917c0039a3ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_vectorField: {fileID: 11400000, guid: a77b64c0cec2f5c4692d4d1fc99e5841, type: 2}
-  m_drawGrid: 0
-  m_drawForces: 1
+  m_vectorField: {fileID: 11400000, guid: b92e1ee58a5d09f42a9bfb04de44da69, type: 2}
+  m_showGrid: 0
+  m_showVectors: 0
 --- !u!4 &268965970
 Transform:
   m_ObjectHideFlags: 0
