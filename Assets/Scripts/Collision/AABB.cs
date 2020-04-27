@@ -57,4 +57,12 @@ public struct AABB
 		size = (max - min);
 		center = min + extents;
 	}
+
+	public void Draw(Color color, float duration = 0.0f)
+	{
+		Debug.DrawLine(new Vector2(min.x, max.y), new Vector2(max.x, max.y), color, duration);
+		Debug.DrawLine(new Vector2(max.x, max.y), new Vector2(max.x, min.y), color, duration);
+		Debug.DrawLine(new Vector2(max.x, min.y), new Vector2(min.x, min.y), color, duration);
+		Debug.DrawLine(new Vector2(min.x, min.y), new Vector2(min.x, max.y), color, duration);
+	}
 }
