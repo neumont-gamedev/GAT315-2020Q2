@@ -4,6 +4,11 @@ using UnityEngine;
 
 public static class Collision
 {
+	public static bool TestOverlap(ref Contact contact)
+	{
+		return (TestOverlap(contact.bodyA.shape, contact.bodyA.position, contact.bodyB.shape, contact.bodyB.position));
+	}
+
 	public static bool TestOverlap(Shape shapeA, Vector2 positionA, Shape shapeB, Vector2 positionB)
 	{
 		bool intersects = false;
@@ -48,32 +53,76 @@ public static class Collision
 					contact.bodyA = bodies[i];
 					contact.bodyB = bodies[j];
 
-					if (contact.bodyA.shape.type == Shape.eType.CIRCLE && contact.bodyB.shape.type == Shape.eType.CIRCLE)
-					{
-						CreateManifold(ref contact.manifold, contact.bodyA.position, ((CircleShape)contact.bodyA.shape).radius,
-															 contact.bodyB.position, ((CircleShape)contact.bodyB.shape).radius);
-					}
-					else if (contact.bodyA.shape.type == Shape.eType.BOX && contact.bodyB.shape.type == Shape.eType.BOX)
-					{
-						CreateManifold(ref contact.manifold, contact.bodyA.position, ((BoxShape)contact.bodyA.shape).size,
-															 contact.bodyB.position, ((BoxShape)contact.bodyB.shape).size);
-					}
-					else if (contact.bodyA.shape.type == Shape.eType.CIRCLE && contact.bodyB.shape.type == Shape.eType.BOX)
-					{
-						CreateManifold(ref contact.manifold, contact.bodyA.position, ((CircleShape)contact.bodyA.shape).radius,
-										   contact.bodyB.position, ((BoxShape)contact.bodyB.shape).size);
-					}
-					else if (contact.bodyA.shape.type == Shape.eType.BOX && contact.bodyB.shape.type == Shape.eType.CIRCLE)
-					{
-						CreateManifold(ref contact.manifold, contact.bodyA.position, ((BoxShape)contact.bodyA.shape).size,
-															 contact.bodyB.position, ((CircleShape)contact.bodyB.shape).radius);
-					}
-
+					CreateManifold(ref contact);
 					//Debug.DrawLine(contact.bodyB.position, contact.bodyB.position + contact.manifold.normal * contact.manifold.depth, Color.white);
 
 					contacts.Add(contact);
 				}
 			}
+		}
+	}
+
+	public static void CreateNarrowPhaseContacts(ref List<Contact> contacts)
+	{
+		//Debug.Log("contacts: " + contacts.Count);
+		contacts.RemoveAll(contact => (TestOverlap(contact.bodyA.shape, contact.bodyA.position, contact.bodyB.shape, contact.bodyB.position) == false));
+
+		// create manifolds for contacts
+		for (int i = 0; i < contacts.Count; i++)
+		{
+			Contact contact = contacts[i];
+			CreateManifold(ref contact);
+			contacts[i] = contact;
+		}
+	}
+
+	public static void CreateBroadPhaseContacts(BroadPhase broadPhase, ref List<PhysicsBody> bodies, out List<Contact> contacts)
+	{
+		//Debug.Log("bodies: " + bodies.Count);
+
+		contacts = new List<Contact>();
+
+		List<PhysicsBody> queryBodies = new List<PhysicsBody>();
+		foreach (PhysicsBody body in bodies)
+		{
+			queryBodies.Clear();
+			broadPhase.Query(body, ref queryBodies);
+			foreach (PhysicsBody queryBody in queryBodies)
+			{
+				if (queryBody == body) continue;
+
+				Contact contact = new Contact();
+				contact.bodyA = body;
+				contact.bodyB = queryBody;
+
+				//Debug.DrawLine(contact.bodyA.position, contact.bodyB.position);
+
+				contacts.Add(contact);
+			}
+		}
+	}
+
+	public static void CreateManifold(ref Contact contact)
+	{
+		if (contact.bodyA.shape.type == Shape.eType.CIRCLE && contact.bodyB.shape.type == Shape.eType.CIRCLE)
+		{
+			CreateManifold(ref contact.manifold, contact.bodyA.position, ((CircleShape)contact.bodyA.shape).radius,
+												 contact.bodyB.position, ((CircleShape)contact.bodyB.shape).radius);
+		}
+		else if (contact.bodyA.shape.type == Shape.eType.BOX && contact.bodyB.shape.type == Shape.eType.BOX)
+		{
+			CreateManifold(ref contact.manifold, contact.bodyA.position, ((BoxShape)contact.bodyA.shape).size,
+												 contact.bodyB.position, ((BoxShape)contact.bodyB.shape).size);
+		}
+		else if (contact.bodyA.shape.type == Shape.eType.CIRCLE && contact.bodyB.shape.type == Shape.eType.BOX)
+		{
+			CreateManifold(ref contact.manifold, contact.bodyA.position, ((CircleShape)contact.bodyA.shape).radius,
+							   contact.bodyB.position, ((BoxShape)contact.bodyB.shape).size);
+		}
+		else if (contact.bodyA.shape.type == Shape.eType.BOX && contact.bodyB.shape.type == Shape.eType.CIRCLE)
+		{
+			CreateManifold(ref contact.manifold, contact.bodyA.position, ((BoxShape)contact.bodyA.shape).size,
+												 contact.bodyB.position, ((CircleShape)contact.bodyB.shape).radius);
 		}
 	}
 

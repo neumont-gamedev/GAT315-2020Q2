@@ -15,4 +15,4 @@ MonoBehaviour:
   gridScale: 0.5
   noiseOffset: 5.37
   noiseScale: 0.05
-  force: 8.31
+  force: 10

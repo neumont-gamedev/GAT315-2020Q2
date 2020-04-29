@@ -11,6 +11,11 @@ public class BoxShape : Shape
 	public Vector2 min { get { return (Vector2)transform.position - extents; } }
 	public Vector2 max { get { return (Vector2)transform.position + extents; } }
 
+	public override AABB ComputeAABB(Vector2 position)
+	{
+		return new AABB(position, size);
+	}
+
 	public override float ComputeMass(float density)
 	{
 		return (size.x * size.y) * density;

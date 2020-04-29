@@ -12,17 +12,25 @@ public class PhysicsWorld : MonoBehaviour
     [HideInInspector] public List<PhysicsBody> bodies = new List<PhysicsBody>();
     [HideInInspector] public List<PhysicsJoint> joints = new List<PhysicsJoint>();
 
+    BroadPhase broadPhase { get; set; } = new QuadtreeBroadPhase();
+
     static public Vector2 gravity { get; set; } = new Vector2(0, -9.81f);
     static public float fixedTimeStep { get; set; } = (1.0f / 60.0f);
+    static public AABB aabb { get; set; }
 
     float timeAccumulator { get; set; } = 0.0f;
+
+    private void Start()
+    {
+        aabb = new AABB(Vector2.zero, ScreenWorldSize);
+    }
 
     void Update()
     {
         gravity = new Vector2(0.0f, m_gravity.value);
         fixedTimeStep = 1.0f / m_fps.value;
 
-        //bodies.ForEach(body => m_vectorField.ApplyForce(body));
+        bodies.ForEach(body => m_vectorField.ApplyForce(body));
         joints.ForEach(joint => joint.ApplyForce(fixedTimeStep));
 
         timeAccumulator = (m_simulate.value) ? timeAccumulator + Time.deltaTime : 0;
@@ -33,12 +41,18 @@ public class PhysicsWorld : MonoBehaviour
 
             // check collision
             bodies.ForEach(body => body.isTouching = false);
-            Collision.CreateContacts(ref bodies, out List<Contact> contacts);
+
+            broadPhase.Build(aabb, ref bodies);
+            Collision.CreateBroadPhaseContacts(broadPhase, ref bodies, out List<Contact> contacts);
+            Collision.CreateNarrowPhaseContacts(ref contacts);
+
             contacts.ForEach(contact => { contact.bodyA.isTouching = true; contact.bodyB.isTouching = true; });
             ContactSolver.Resolve(ref contacts);
 
             timeAccumulator = timeAccumulator - fixedTimeStep;
         }
+        broadPhase.Draw();
+
         joints.ForEach(joint => joint.DebugDraw());
 
         bodies.ForEach(body => body.force = Vector2.zero);
