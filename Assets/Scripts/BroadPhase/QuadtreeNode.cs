@@ -6,32 +6,38 @@ public class QuadtreeNode
 {
 	AABB m_aabb;
 	int m_capacity;
-	List<PhysicsBody> m_bodies = new List<PhysicsBody>();
+	List<PhysicsBody> m_bodies = null;
 	bool m_subdivided = false;
+	int m_level = 0;
 
 	QuadtreeNode m_northeast = null;
 	QuadtreeNode m_northwest = null;
 	QuadtreeNode m_southeast = null;
 	QuadtreeNode m_southwest = null;
 
-	public QuadtreeNode(AABB aabb, int capacity)
+	public QuadtreeNode(AABB aabb, int capacity, int level)
 	{
 		m_aabb = aabb;
 		m_capacity = capacity;
+		m_bodies = new List<PhysicsBody>();
+		m_level = level;
 	}
 
 	public void Insert(PhysicsBody body)
 	{
 		AABB aabb = body.shape.ComputeAABB(body.position);
 
+		// check if within boundary
 		if (!m_aabb.Contains(aabb)) return;
 
+		// check if under capacity, if so add to node bodies
 		if (m_bodies.Count < m_capacity)
 		{
 			m_bodies.Add(body);
 		}
 		else
 		{
+			// exceeded capactity, subdivide aabb and insert in to containing boundry
 			if (!m_subdivided)
 			{
 				Subdivide();
@@ -50,9 +56,8 @@ public class QuadtreeNode
 
 		foreach (PhysicsBody body in m_bodies)
 		{
+			BroadPhase.NumberOfTests++;
 			AABB queryAABB = body.shape.ComputeAABB(body.position);
-
-			//Debug.DrawLine(aabb.center, queryAABB.center);
 			if (queryAABB.Contains(aabb))
 			{
 				bodies.Add(body);
@@ -70,18 +75,23 @@ public class QuadtreeNode
 
 	void Subdivide()
 	{
-		m_subdivided = true;
+		m_northeast = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x - m_aabb.size.x * 0.25f, m_aabb.center.y + m_aabb.size.y * 0.25f), m_aabb.extents), m_capacity, m_level + 1);
+		m_northwest = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x + m_aabb.size.x * 0.25f, m_aabb.center.y + m_aabb.size.y * 0.25f), m_aabb.extents), m_capacity, m_level + 1);
+		m_southeast = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x - m_aabb.size.x * 0.25f, m_aabb.center.y - m_aabb.size.y * 0.25f), m_aabb.extents), m_capacity, m_level + 1);
+		m_southwest = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x + m_aabb.size.x * 0.25f, m_aabb.center.y - m_aabb.size.y * 0.25f), m_aabb.extents), m_capacity, m_level + 1);
 
-		m_northeast = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x + (m_aabb.extents.x * 0.5f), m_aabb.center.y + (m_aabb.extents.y * 0.5f)), m_aabb.extents), m_capacity);
-		m_northwest = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x - (m_aabb.extents.x * 0.5f), m_aabb.center.y + (m_aabb.extents.y * 0.5f)), m_aabb.extents), m_capacity);
-		m_southeast = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x + (m_aabb.extents.x * 0.5f), m_aabb.center.y - (m_aabb.extents.y * 0.5f)), m_aabb.extents), m_capacity);
-		m_southwest = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x - (m_aabb.extents.x * 0.5f), m_aabb.center.y - (m_aabb.extents.y * 0.5f)), m_aabb.extents), m_capacity);
+		m_subdivided = true;
 	}
 
 	public void Draw()
 	{
-		Color color = Color.red;
-		m_aabb.Draw(color);
+		Color color = QuadtreeBroadPhase.colors[m_level % QuadtreeBroadPhase.colors.Length];
+
+		AABB aabb = new AABB(m_aabb.center, m_aabb.size * 0.98f);
+		aabb.Draw(color);
+		m_bodies.ForEach(body => body.shape.color = color);
+		m_bodies.ForEach(body => Debug.DrawLine(body.position, m_aabb.center, color));
+
 		if (m_subdivided)
 		{
 			m_northeast.Draw();
