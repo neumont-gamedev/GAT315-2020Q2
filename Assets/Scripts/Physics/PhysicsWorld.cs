@@ -13,7 +13,6 @@ public class PhysicsWorld : MonoBehaviour
     [HideInInspector] public List<PhysicsJoint> joints = new List<PhysicsJoint>();
 
     BroadPhase broadPhase { get; set; } = new QuadtreeBroadPhase();
-
     static public Vector2 gravity { get; set; } = new Vector2(0, -9.81f);
     static public float fixedTimeStep { get; set; } = (1.0f / 60.0f);
     static public AABB aabb { get; set; }
@@ -39,7 +38,7 @@ public class PhysicsWorld : MonoBehaviour
             bodies.ForEach(body => body.Step(fixedTimeStep));
             bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedTimeStep));
 
-            // check collision
+            // collision
             bodies.ForEach(body => body.isTouching = false);
 
             broadPhase.Build(aabb, ref bodies);
@@ -47,6 +46,8 @@ public class PhysicsWorld : MonoBehaviour
             Collision.CreateNarrowPhaseContacts(ref contacts);
 
             contacts.ForEach(contact => { contact.bodyA.isTouching = true; contact.bodyB.isTouching = true; });
+
+            // collision resolution
             ContactSolver.Resolve(ref contacts);
 
             timeAccumulator = timeAccumulator - fixedTimeStep;
