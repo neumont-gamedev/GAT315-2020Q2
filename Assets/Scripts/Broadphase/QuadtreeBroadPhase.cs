@@ -30,6 +30,9 @@ public class QuadtreeBroadPhase : BroadPhase
 
 	public override void Draw()
 	{
-		m_rootNode.Draw();
+		if (m_rootNode != null)
+		{
+			m_rootNode.Draw();
+		}
 	}
 }

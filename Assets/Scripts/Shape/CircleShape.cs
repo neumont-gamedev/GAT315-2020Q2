@@ -13,11 +13,6 @@ public class CircleShape : Shape
         return new AABB(position, Vector2.one * (radius * 2));
     }
 
-    public override AABB ComputeAABB(Vector2 position)
-    {
-        return new AABB(position, Vector2.one * (radius * 2));
-    }
-
     public override float ComputeMass(float density)
     {
         return (Mathf.PI * (radius * radius)) * density;
