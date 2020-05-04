@@ -8,7 +8,7 @@ public class QuadtreeBroadPhase : BroadPhase
 
 	QuadtreeNode m_rootNode = null;
 
-	public static Color[] colors = { Color.white, Color.red, Color.green, Color.blue, Color.yellow };
+	
 
 	public override void Build(AABB aabb, ref List<PhysicsBody> bodies)
 	{

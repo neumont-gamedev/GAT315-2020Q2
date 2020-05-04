@@ -2,19 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuadtreeBroadPhase : BroadPhase
+public class BVHBroadPhase : BroadPhase
 {
-	public int capacity { get; set; } = 4;
-
-	QuadtreeNode m_rootNode = null;
-
-	
+	BVHNode m_rootNode = null;
 
 	public override void Build(AABB aabb, ref List<PhysicsBody> bodies)
 	{
-		NumberOfTests = 0;
-		m_rootNode = new QuadtreeNode(aabb, capacity, 0);
-		bodies.ForEach(body => { m_rootNode.Insert(body); });
+		List<PhysicsBody> bvhBodies = new List<PhysicsBody>(bodies);
+	
+		bvhBodies.Sort((a, b) => (a.position.x.CompareTo(b.position.x)));
+		m_rootNode = new BVHNode(bvhBodies, 0);
 	}
 
 	public override void Query(AABB aabb, ref List<PhysicsBody> bodies)

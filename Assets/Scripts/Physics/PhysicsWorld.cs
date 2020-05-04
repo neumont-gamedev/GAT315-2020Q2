@@ -8,11 +8,14 @@ public class PhysicsWorld : MonoBehaviour
     [SerializeField] FloatRef m_fps = null;
     [SerializeField] BoolRef m_simulate = null;
     [SerializeField] VectorFieldForce m_vectorField = null;
+    [SerializeField] BroadPhaseEnumRef m_broadPhaseType = null;
 
     [HideInInspector] public List<PhysicsBody> bodies = new List<PhysicsBody>();
     [HideInInspector] public List<PhysicsJoint> joints = new List<PhysicsJoint>();
 
-    BroadPhase broadPhase { get; set; } = new QuadtreeBroadPhase();
+    List<BroadPhase> m_broadPhase = new List<BroadPhase> { new NullBroadPhase(), new QuadtreeBroadPhase(), new BVHBroadPhase() };
+    BroadPhase broadPhase { get; set; } = null;
+
     static public Vector2 gravity { get; set; } = new Vector2(0, -9.81f);
     static public float fixedTimeStep { get; set; } = (1.0f / 60.0f);
     static public AABB aabb { get; set; }
@@ -28,6 +31,8 @@ public class PhysicsWorld : MonoBehaviour
     {
         gravity = new Vector2(0.0f, m_gravity.value);
         fixedTimeStep = 1.0f / m_fps.value;
+
+        broadPhase = m_broadPhase[m_broadPhaseType.index];
 
         bodies.ForEach(body => m_vectorField.ApplyForce(body));
         joints.ForEach(joint => joint.ApplyForce(fixedTimeStep));

@@ -14,12 +14,12 @@ public class NullBroadPhase : BroadPhase
 
 	public override void Query(AABB aabb, ref List<PhysicsBody> bodies)
 	{
-		bodies = this.bodies;
+		bodies.AddRange(this.bodies);
 	}
 
 	public override void Query(PhysicsBody body, ref List<PhysicsBody> bodies)
 	{
-		bodies = this.bodies;
+		bodies.AddRange(this.bodies);
 	}
 
 	public override void Draw()

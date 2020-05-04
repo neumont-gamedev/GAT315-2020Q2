@@ -52,6 +52,16 @@ public struct AABB
 		return (sqrDistance < sqrRadius);
 	}
 
+	public void Expand(Vector2 point)
+	{
+		SetMinMax(Vector2.Min(min, point), Vector2.Max(max, point));
+	}
+
+	public void Expand(AABB aabb)
+	{
+		SetMinMax(Vector2.Min(min, aabb.min), Vector2.Max(max, aabb.max));
+	}
+
 	public void SetMinMax(Vector2 min, Vector2 max)
 	{
 		size = (max - min);

@@ -10,4 +10,5 @@ public abstract class BroadPhase
 	public abstract void Draw();
 
 	public static int NumberOfTests { get; set; } = 0;
+	public static Color[] colors = { Color.white, Color.red, Color.green, Color.blue, Color.yellow, Color.magenta, Color.cyan };
 }

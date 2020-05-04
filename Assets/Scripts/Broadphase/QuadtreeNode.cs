@@ -75,17 +75,20 @@ public class QuadtreeNode
 
 	void Subdivide()
 	{
-		m_northeast = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x - m_aabb.size.x * 0.25f, m_aabb.center.y + m_aabb.size.y * 0.25f), m_aabb.extents), m_capacity, m_level + 1);
-		m_northwest = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x + m_aabb.size.x * 0.25f, m_aabb.center.y + m_aabb.size.y * 0.25f), m_aabb.extents), m_capacity, m_level + 1);
-		m_southeast = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x - m_aabb.size.x * 0.25f, m_aabb.center.y - m_aabb.size.y * 0.25f), m_aabb.extents), m_capacity, m_level + 1);
-		m_southwest = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x + m_aabb.size.x * 0.25f, m_aabb.center.y - m_aabb.size.y * 0.25f), m_aabb.extents), m_capacity, m_level + 1);
+		float xo = m_aabb.extents.x * 0.5f;
+		float yo = m_aabb.extents.y * 0.5f;
+
+		m_northeast = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x - xo, m_aabb.center.y + yo), m_aabb.extents), m_capacity, m_level + 1);
+		m_northwest = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x + xo, m_aabb.center.y + yo), m_aabb.extents), m_capacity, m_level + 1);
+		m_southeast = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x - xo, m_aabb.center.y - yo), m_aabb.extents), m_capacity, m_level + 1);
+		m_southwest = new QuadtreeNode(new AABB(new Vector2(m_aabb.center.x + xo, m_aabb.center.y - yo), m_aabb.extents), m_capacity, m_level + 1);
 
 		m_subdivided = true;
 	}
 
 	public void Draw()
 	{
-		Color color = QuadtreeBroadPhase.colors[m_level % QuadtreeBroadPhase.colors.Length];
+		Color color = BroadPhase.colors[m_level % BroadPhase.colors.Length];
 
 		AABB aabb = new AABB(m_aabb.center, m_aabb.size * 0.98f);
 		aabb.Draw(color);
