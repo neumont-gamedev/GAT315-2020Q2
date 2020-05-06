@@ -343,7 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_renderer: {fileID: 862659299}
   m_type: 0
-  m_uvRate: {x: 0.05, y: 0.025}
+  m_uvRate: {x: 0.01, y: 0.01}
   m_randomize: 0
 --- !u!1 &1189179335
 GameObject:
