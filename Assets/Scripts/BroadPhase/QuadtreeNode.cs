@@ -92,8 +92,8 @@ public class QuadtreeNode
 
 		AABB aabb = new AABB(m_aabb.center, m_aabb.size * 0.98f);
 		aabb.Draw(color);
-		m_bodies.ForEach(body => body.shape.color = color);
-		m_bodies.ForEach(body => Debug.DrawLine(body.position, m_aabb.center, color));
+		//m_bodies.ForEach(body => body.shape.color = color);
+		//m_bodies.ForEach(body => Debug.DrawLine(body.position, m_aabb.center, color));
 
 		if (m_subdivided)
 		{
