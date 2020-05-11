@@ -2,23 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForwardKinematicSegment : MonoBehaviour
+public class ForwardKinematicSegment : KinematicSegment
 {
 	[SerializeField] [Range(-90.0f, 90.0f)] float m_angle = 0.0f;
 	[SerializeField] bool m_enableNoise = false;
 
-	public ForwardKinematicSegment parent { get; set; }
-
-	public Vector2 start { get { return transform.position; } set { transform.position = value; } }
-	public Vector2 end { get; set; }
-
-	public float length { get { return m_polar.length; } set { m_polar.length = value; } }
-	public float angle { get { return m_polar.angle; } set { m_polar.angle = value; } }
-	public float width { get; set; }
 	public float baseAngle { get; set; }
 	public float noiseRate { get; set; } = 1.0f;
 
-	Coordinate.Polar m_polar;
 	float m_noise;
 
 	private void Start()
@@ -42,7 +33,7 @@ public class ForwardKinematicSegment : MonoBehaviour
 		transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
 	}
 
-	public void Initialize(ForwardKinematicSegment parent, Vector2 position, float angle, float length, float width)
+	public override void Initialize(KinematicSegment parent, Vector2 position, float angle, float length, float width)
 	{
 		this.parent = parent;
 		this.width = width;
@@ -53,11 +44,4 @@ public class ForwardKinematicSegment : MonoBehaviour
 		start = position;
 		baseAngle = angle;
 	}
-
-	public void CalculateEnd()
-	{
-		Vector2 offset = Coordinate.PolarToCartesian(m_polar);
-		end = start + offset;
-	}
 }
-
