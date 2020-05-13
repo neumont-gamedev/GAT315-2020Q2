@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7771361857202444885}
   - component: {fileID: 6236811851510752448}
   m_Layer: 0
-  m_Name: FluidCellBox
+  m_Name: FluidCell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -49,7 +49,8 @@ MonoBehaviour:
   m_renderer: {fileID: 7771361857202444885}
   m_colorA: {r: 0, g: 0, b: 0, a: 1}
   m_colorB: {r: 1, g: 1, b: 1, a: 1}
-  m_type: 0
+  m_type: 1
+  m_scale: 2
 --- !u!33 &7771361857202444882
 MeshFilter:
   m_ObjectHideFlags: 0

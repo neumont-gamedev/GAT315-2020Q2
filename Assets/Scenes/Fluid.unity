@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee4f42b1046cacd46b14bbbd5bffe48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_density: 1
+  m_density: 50
   m_fluid: {fileID: 1614912178}
 --- !u!4 &284922359
 Transform:
@@ -287,11 +287,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5450838301f8dbd42b94e26df302a925, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_size: 20
-  m_cellSize: 1
-  m_diffusion: 1
-  m_viscosity: 1
-  m_fluidCellVisual: {fileID: 7771361857202444883, guid: 4af35e6d21ed50a45876bc9952306c02,
+  m_size: 50
+  m_cellSize: 0.2
+  m_diffuse: 0.01
+  m_viscosity: 0.01
+  m_iterations: 1
+  m_fps: 30
+  m_fluidCell: {fileID: 7771361857202444883, guid: 4af35e6d21ed50a45876bc9952306c02,
     type: 3}
 --- !u!4 &1614912179
 Transform:
@@ -360,7 +362,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
