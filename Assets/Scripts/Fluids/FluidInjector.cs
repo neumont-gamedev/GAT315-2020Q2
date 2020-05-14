@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class FluidInjector : MonoBehaviour
 {
-	[SerializeField] [Range(0, 1.0f)] float m_density = 1.0f;
+	[SerializeField] [Range(0, 100.0f)] float m_density = 1.0f;
 	[SerializeField] Fluid m_fluid = null;
 
 	void Update()
 	{
-		bool apply = Input.GetButton("Fire1");
 		Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-		m_fluid.Inject(ray, m_density, apply);
+		float density = (Input.GetButton("Fire1")) ? m_density : 0;
+		Vector2 velocity = (Input.GetButton("Fire2")) ? new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y")) * 5000.0f : Vector2.zero;
+
+		m_fluid.Inject(ray, density, velocity);
 	}
 }
