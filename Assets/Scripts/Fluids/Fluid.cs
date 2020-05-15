@@ -14,8 +14,9 @@ public class Fluid : MonoBehaviour
 
 	[SerializeField] [Range(10, 100)] int m_size = 10;
 	[SerializeField] [Range(0, 5)] float m_cellSize = 1;
-	[SerializeField] [Range(0, 50)] float m_diffuse = 1;
-	[SerializeField] [Range(0, 50)] float m_viscosity = 1;
+	[SerializeField] [Range(0, 1)] float m_diffuse = 1;
+	[SerializeField] [Range(0, 1)] float m_viscosity = 1;
+	[SerializeField] [Range(0, 1)] float m_decay = 1;
 	[SerializeField] [Range(1, 20)] int m_iterations = 1;
 	[SerializeField] [Range(30, 90)] int m_fps = 60;
 	[SerializeField] FluidCell m_fluidCell = null;
@@ -72,7 +73,6 @@ public class Fluid : MonoBehaviour
 
 			Advect(ref m_grid.vx, ref m_grid.prev_vx, ref m_grid.prev_vx, ref m_grid.prev_vy, fixedTimeStep, eBounds.X);
 			Advect(ref m_grid.vy, ref m_grid.prev_vy, ref m_grid.prev_vx, ref m_grid.prev_vy, fixedTimeStep, eBounds.Y);
-
 			Project(ref m_grid.vx, ref m_grid.vy, ref m_grid.prev_vx, ref m_grid.prev_vy, m_iterations);
 
 			// DENSITY
@@ -81,13 +81,14 @@ public class Fluid : MonoBehaviour
 			FluidGrid.Swap(ref m_grid.prev_density, ref m_grid.density);
 			Advect(ref m_grid.density, ref m_grid.prev_density, ref m_grid.vx, ref m_grid.vy, fixedTimeStep, eBounds.NONE);
 
-			for (int i = 0; i < m_grid.prev_density.Length; i++)
-			{
-				m_grid.prev_density[i] = m_grid.prev_density[i] * 0.95f;
-			}
-
 			timeAccumulator = timeAccumulator - fixedTimeStep;
 		}
+
+		for (int i = 0; i < m_grid.density.Length; i++)
+		{
+			m_grid.density[i] = m_grid.density[i] * Mathf.Pow(m_decay, Time.deltaTime);
+		}
+
 		// set grid cell object density
 		for (int i = 0; i < m_grid.cells.Length; i++)
 		{
@@ -105,15 +106,15 @@ public class Fluid : MonoBehaviour
 			if (fcv != null)
 			{
 				int index = GetIndex(fcv.x, fcv.y);
-				if (density != 0)
+				//if (density != 0)
 				{
-					m_grid.prev_density[index] = density;
+					m_grid.density[index] += density;
 				}
 
 				if (velocity.sqrMagnitude > 0)
 				{
-					m_grid.prev_vx[index] = velocity.x;
-					m_grid.prev_vy[index] = velocity.y;
+					m_grid.vx[index] += velocity.x;
+					m_grid.vy[index] += velocity.y;
 				}
 			}
 		}
