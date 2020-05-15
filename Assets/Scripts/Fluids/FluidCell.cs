@@ -17,6 +17,7 @@ public class FluidCell : MonoBehaviour
     public int y { get; set; } = 0;
 
     Material m_material = null;
+    Gradient m_gradient = null;
 
     void Start()
     {

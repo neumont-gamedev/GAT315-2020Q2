@@ -30,4 +30,3 @@ public class InverseKinematicSegment : KinematicSegment
 		start = target - (direction.normalized * length);
 	}
 }
-
