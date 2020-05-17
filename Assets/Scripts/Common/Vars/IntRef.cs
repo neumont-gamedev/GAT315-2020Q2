@@ -8,4 +8,5 @@ public class IntRef : ScriptableObject
 	[SerializeField] int m_value;
 
 	public int value { get => m_value; set => m_value = value; }
+	public static implicit operator int(IntRef v) { return v.m_value; }
 }

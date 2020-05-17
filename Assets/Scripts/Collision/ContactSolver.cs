@@ -22,7 +22,7 @@ public static class ContactSolver
 			float normalVelocity = Vector3.Dot(relativeVelocity, contact.manifold.normal);
 			if (normalVelocity > 0) continue;
 
-			float restitution = (Mathf.Abs(normalVelocity) < 0.1f) ? 0.0f : 1.0f;
+			float restitution = (Mathf.Abs(normalVelocity) < 0.1f) ? 0.0f : 0.5f;
 
 			float impulseMagnitude = (-(1.0f + restitution) * normalVelocity) / totalInverseMass;
 			Vector2 impulse = contact.manifold.normal * impulseMagnitude;

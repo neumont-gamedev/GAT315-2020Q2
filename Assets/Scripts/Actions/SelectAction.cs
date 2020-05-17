@@ -32,6 +32,10 @@ public class SelectAction : Action
 	public override void StartEvent()
 	{
 		bodySelect = PhysicsWorld.GetPhysicsBodyFromPosition(Input.mousePosition);
+		if (bodySelect)
+		{
+			bodySelect.SetAwake();
+		}
 	}
 
 	public override void StopEvent()

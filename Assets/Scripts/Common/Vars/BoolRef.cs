@@ -8,4 +8,5 @@ public class BoolRef : ScriptableObject
 	[SerializeField] bool m_value;
 
 	public bool value { get => m_value; set => m_value = value; }
+	public static implicit operator bool(BoolRef v) { return v.m_value; }
 }

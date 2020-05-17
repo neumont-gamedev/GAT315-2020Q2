@@ -34,7 +34,8 @@ public class CreateAction : Action
 			case EmissionEnumRef.eType.Burst:
 				for (int i = 0; i < 20; i++)
 				{
-					Vector3 offset = Random.insideUnitCircle;
+					//Debug.Break();
+					Vector3 offset = Random.insideUnitCircle.normalized * m_size.value * 0.5f;
 					Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
 					Vector2 velocity = Random.insideUnitCircle.normalized * m_velocity.value;
 					Create(position, velocity);
@@ -48,7 +49,8 @@ public class CreateAction : Action
 					timer = timer + Time.deltaTime;
 					while (timer > rateTime)
 					{
-						Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+						Vector3 offset = Random.insideUnitCircle.normalized * m_size.value * 0.5f;
+						Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
 						Vector2 velocity = Random.insideUnitCircle.normalized * m_velocity.value;
 						Create(position, velocity);
 

@@ -7,6 +7,7 @@ public class PhysicsWorld : MonoBehaviour
     [SerializeField] FloatRef m_gravity = null;
     [SerializeField] FloatRef m_fps = null;
     [SerializeField] BoolRef m_simulate = null;
+    [SerializeField] FloatRef m_sleep = null;
     [SerializeField] VectorFieldForce m_vectorField = null;
     [SerializeField] BroadPhaseEnumRef m_broadPhaseType = null;
 
@@ -34,23 +35,33 @@ public class PhysicsWorld : MonoBehaviour
 
         broadPhase = m_broadPhase[m_broadPhaseType.index];
 
-        bodies.ForEach(body => m_vectorField.ApplyForce(body));
+        //bodies.ForEach(body => m_vectorField.ApplyForce(body));
         joints.ForEach(joint => joint.ApplyForce(fixedTimeStep));
 
         timeAccumulator = (m_simulate.value) ? timeAccumulator + Time.deltaTime : 0;
         while (timeAccumulator > fixedTimeStep)
         {
             bodies.ForEach(body => body.Step(fixedTimeStep));
-            bodies.ForEach(body => Integrator.SemiImplicitEuler(body, fixedTimeStep));
+
+            // integrate
+            bodies.ForEach(body => { if ((body.state & PhysicsBody.eState.AWAKE) != 0) Integrator.SemiImplicitEuler(body, fixedTimeStep); });
+
+            // sleep
+            bodies.ForEach(body => body.UpdateSleep(m_sleep));
 
             // collision
-            bodies.ForEach(body => body.isTouching = false);
+            bodies.ForEach(body => body.state &= ~PhysicsBody.eState.COLLIDED);
 
             broadPhase.Build(aabb, ref bodies);
             Collision.CreateBroadPhaseContacts(broadPhase, ref bodies, out List<Contact> contacts);
             Collision.CreateNarrowPhaseContacts(ref contacts);
+            contacts.ForEach(contact =>
+            {
+                contact.bodyA.state &= PhysicsBody.eState.COLLIDED;
+                contact.bodyB.state &= PhysicsBody.eState.COLLIDED;
+            });
 
-            contacts.ForEach(contact => { contact.bodyA.isTouching = true; contact.bodyB.isTouching = true; });
+            PhysicsBody.UpdateAwake(ref contacts);
 
             // collision resolution
             ContactSolver.Resolve(ref contacts);
@@ -58,7 +69,6 @@ public class PhysicsWorld : MonoBehaviour
             timeAccumulator = timeAccumulator - fixedTimeStep;
         }
         broadPhase.Draw();
-
         joints.ForEach(joint => joint.DebugDraw());
 
         bodies.ForEach(body => body.force = Vector2.zero);
