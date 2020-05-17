@@ -83,9 +83,9 @@ public class PhysicsBody : MonoBehaviour
 
 	public void UpdateSleep(float limit)
 	{
-		float baseBias = 0.5f;
-		float bias = Mathf.Pow(baseBias, Time.deltaTime);
-		averageSpeed = (bias * averageSpeed) + ((1.0f - bias) * velocity.magnitude * Time.deltaTime);
+		float bias = 0.5f;
+		float speed = velocity.magnitude;
+		averageSpeed = (bias * averageSpeed) + ((1.0f - bias) * speed);
 		if (averageSpeed < limit)
 		{
 			SetAwake(false);
