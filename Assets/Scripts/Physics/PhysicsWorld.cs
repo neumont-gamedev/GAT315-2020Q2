@@ -30,8 +30,8 @@ public class PhysicsWorld : MonoBehaviour
 
     void Update()
     {
-        gravity = new Vector2(0.0f, m_gravity.value);
-        fixedTimeStep = 1.0f / m_fps.value;
+        gravity = new Vector2(0.0f, m_gravity);
+        fixedTimeStep = 1.0f / m_fps;
 
         broadPhase = m_broadPhase[m_broadPhaseType.index];
 
@@ -57,8 +57,8 @@ public class PhysicsWorld : MonoBehaviour
             Collision.CreateNarrowPhaseContacts(ref contacts);
             contacts.ForEach(contact =>
             {
-                contact.bodyA.state &= PhysicsBody.eState.COLLIDED;
-                contact.bodyB.state &= PhysicsBody.eState.COLLIDED;
+                contact.bodyA.state |= PhysicsBody.eState.COLLIDED; // 0, 0, 0 | 0, 1, 0
+                contact.bodyB.state |= PhysicsBody.eState.COLLIDED;
             });
 
             PhysicsBody.UpdateAwake(ref contacts);

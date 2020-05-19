@@ -19,6 +19,8 @@ public class PhysicsBody : MonoBehaviour
 		AWAKE		= (1 << 2)
 	}
 
+	// 0, 0, 0, 0, 0, 1, 1, 1
+
 	[SerializeField] Shape m_shape = null;
 
 	public BodyTypeEnumRef.eType type { get; set; } = BodyTypeEnumRef.eType.Dynamic;
@@ -32,7 +34,7 @@ public class PhysicsBody : MonoBehaviour
 	public float inverseMass { get { return (mass == 0) ? 0 : 1.0f / mass; } }
 	public float gravityScale { get; set; } = 1.0f;
 	public Shape shape { get => m_shape; set => m_shape = value; }
-	public eState state { get; set; } = eState.ACTIVE | eState.AWAKE;
+	public eState state { get; set; } = eState.ACTIVE | eState.AWAKE; // state = 1, 0, 1
 
 	public void ApplyForce(Vector2 force, eForceMode mode)
 	{
