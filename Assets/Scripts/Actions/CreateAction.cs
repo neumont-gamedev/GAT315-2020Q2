@@ -13,6 +13,7 @@ public class CreateAction : Action
 	[SerializeField] FloatRef m_resitution = null;
 
 	[SerializeField] FloatRef m_damping = null;
+	[SerializeField] FloatRef m_restitution = null;
 	[SerializeField] FloatRef m_size = null;
 
 	float timer { get; set; } = 0.0f;

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class ContactSolver
 {
-	public static void Resolve(ref List<Contact> contacts)
+	public static void Resolve(ref List<Contact> contacts, float restingLimit = 0.1f)
 	{
 		foreach(Contact contact in contacts)
 		{
