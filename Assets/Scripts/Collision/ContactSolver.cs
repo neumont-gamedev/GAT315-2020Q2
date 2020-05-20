@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class ContactSolver
 {
-	public static void Resolve(ref List<Contact> contacts)
+	public static void Resolve(ref List<Contact> contacts, float restingLimit = 0.1f)
 	{
 		foreach(Contact contact in contacts)
 		{
@@ -22,7 +22,17 @@ public static class ContactSolver
 			float normalVelocity = Vector3.Dot(relativeVelocity, contact.manifold.normal);
 			if (normalVelocity > 0) continue;
 
-			float restitution = (Mathf.Abs(normalVelocity) < 0.1f) ? 0.0f : 0.5f;
+			//// velocity from acceleration
+			//float velocityFromAcceleration = 0;
+			//if ((contact.bodyA.state & PhysicsBody.eState.AWAKE) != 0)
+			//{
+			//	velocityFromAcceleration += contact.bodyA.prevAcceleration * Time.deltaTime * contact.manifold.normal;
+			//}
+
+			float restitution = (contact.bodyA.restitution + contact.bodyB.restitution) * 0.5f;
+			restitution = (Mathf.Abs(normalVelocity) < restingLimit) ? 0.0f : restitution;
+
+			//Debug.Log(Mathf.Abs(normalVelocity));
 
 			float impulseMagnitude = (-(1.0f + restitution) * normalVelocity) / totalInverseMass;
 			Vector2 impulse = contact.manifold.normal * impulseMagnitude;

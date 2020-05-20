@@ -1,23 +1,4 @@
-﻿
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -29,7 +10,7 @@ public class VectorFieldForce : Force
 
     Vector2[,] m_grid;
 
-    public override void ApplyForce(PhysicsBody body)
+    public override void ApplyForce(PhysicsBody body, float strength)
     {
         AABB aabb = new AABB(Vector2.zero, PhysicsWorld.ScreenWorldSize);
         Vector2 size = aabb.size * m_vectorField.gridScale;
@@ -43,7 +24,7 @@ public class VectorFieldForce : Force
 
         if (x < 0 || x >= m_grid.GetLength(0) || y < 0 || y >= m_grid.GetLength(1)) return;
 
-        Vector2 force = m_grid[x, y] * m_vectorField.force;
+        Vector2 force = m_grid[x, y] * strength;
         body.ApplyForce(force, PhysicsBody.eForceMode.ACCELERATION);
     }
 

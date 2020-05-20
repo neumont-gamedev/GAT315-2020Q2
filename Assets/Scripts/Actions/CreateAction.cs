@@ -12,6 +12,7 @@ public class CreateAction : Action
 	[SerializeField] FloatRef m_velocity = null;
 
 	[SerializeField] FloatRef m_damping = null;
+	[SerializeField] FloatRef m_restitution = null;
 	[SerializeField] FloatRef m_size = null;
 
 	float timer { get; set; } = 0.0f;
@@ -71,6 +72,7 @@ public class CreateAction : Action
 
 		body.type = m_bodyType.type;
 		body.damping = m_damping.value;
+		body.restitution = m_restitution.value;
 
 		if (body.shape.type == Shape.eType.CIRCLE)
 		{

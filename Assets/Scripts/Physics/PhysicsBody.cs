@@ -27,12 +27,14 @@ public class PhysicsBody : MonoBehaviour
 	public Vector2 position { get { return transform.position; } set { transform.position = value; } }
 	public Vector2 force { get; set; } = Vector2.zero;
 	public Vector2 acceleration { get; set; } = Vector2.zero;
+	public Vector2 prevAcceleration { get; set; } = Vector2.zero;
 	public Vector2 velocity { get; set; } = Vector2.zero;
 	public float averageSpeed { get; set; } = 0.5f;
 	public float damping { get; set; } = 1.0f;
 	public float mass { get; set; } = 3.0f;
 	public float inverseMass { get { return (mass == 0) ? 0 : 1.0f / mass; } }
 	public float gravityScale { get; set; } = 1.0f;
+	public float restitution { get; set; } = 0.5f;
 	public Shape shape { get => m_shape; set => m_shape = value; }
 	public eState state { get; set; } = eState.ACTIVE | eState.AWAKE; // state = 1, 0, 1
 
@@ -67,6 +69,7 @@ public class PhysicsBody : MonoBehaviour
 
 		// update acceleration
 		acceleration = acceleration + (PhysicsWorld.gravity * gravityScale) + (force / mass);
+		prevAcceleration = acceleration;
 	}
 
 	public void SetAwake(bool awake = true)
