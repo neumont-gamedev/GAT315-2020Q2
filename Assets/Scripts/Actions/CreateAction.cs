@@ -10,6 +10,7 @@ public class CreateAction : Action
 	[SerializeField] ShapeEnumRef m_shapeType = null;
 	[SerializeField] EmissionEnumRef m_emission = null;
 	[SerializeField] FloatRef m_velocity = null;
+	[SerializeField] FloatRef m_resitution = null;
 
 	[SerializeField] FloatRef m_damping = null;
 	[SerializeField] FloatRef m_size = null;
@@ -71,6 +72,7 @@ public class CreateAction : Action
 
 		body.type = m_bodyType.type;
 		body.damping = m_damping.value;
+		body.restitution = m_resitution.value;
 
 		if (body.shape.type == Shape.eType.CIRCLE)
 		{

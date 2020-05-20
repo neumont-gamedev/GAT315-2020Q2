@@ -30,6 +30,7 @@ public class PhysicsBody : MonoBehaviour
 	public Vector2 velocity { get; set; } = Vector2.zero;
 	public float averageSpeed { get; set; } = 0.5f;
 	public float damping { get; set; } = 1.0f;
+	public float restitution { get; set; } = 0.5f;
 	public float mass { get; set; } = 3.0f;
 	public float inverseMass { get { return (mass == 0) ? 0 : 1.0f / mass; } }
 	public float gravityScale { get; set; } = 1.0f;
