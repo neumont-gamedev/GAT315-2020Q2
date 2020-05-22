@@ -11,6 +11,7 @@ public class CreateAction : Action
 	[SerializeField] EmissionEnumRef m_emission = null;
 	[SerializeField] FloatRef m_velocity = null;
 	[SerializeField] FloatRef m_resitution = null;
+	[SerializeField] FloatRef m_density = null;
 
 	[SerializeField] FloatRef m_damping = null;
 	[SerializeField] FloatRef m_size = null;
@@ -82,7 +83,7 @@ public class CreateAction : Action
 		{
 			((BoxShape)body.shape).size = new Vector2(m_size.value, m_size.value);
 		}
-		body.mass = (body.type == BodyTypeEnumRef.eType.Static) ? 0.0f : body.shape.ComputeMass(1.0f);
+		body.mass = (body.type == BodyTypeEnumRef.eType.Static) ? 0.0f : body.shape.ComputeMass(m_density);
 		body.ApplyForce(velocity, PhysicsBody.eForceMode.VELOCITY);
 
 		m_physicsWorld.bodies.Add(body);
