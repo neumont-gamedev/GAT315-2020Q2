@@ -142,7 +142,7 @@ PrefabInstance:
     - target: {fileID: 2558495341168899622, guid: f2a96f35d0ed43e439172b1d712a66e5,
         type: 3}
       propertyPath: m_Name
-      value: MassScale
+      value: Density
       objectReference: {fileID: 0}
     - target: {fileID: 2558495341168899623, guid: f2a96f35d0ed43e439172b1d712a66e5,
         type: 3}
@@ -882,7 +882,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 15
   m_Viewport: {fileID: 845183742}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1126170022}
@@ -1693,7 +1693,7 @@ MonoBehaviour:
   m_emission: {fileID: 11400000, guid: 37c7e79c07d4e254592a9c676588aa25, type: 2}
   m_velocity: {fileID: 11400000, guid: 365266bde46ff744d9677b4220fa955d, type: 2}
   m_resitution: {fileID: 11400000, guid: 8a771413db9e4684682424c0dfa6092f, type: 2}
-  m_massScale: {fileID: 11400000, guid: aecba9f4e43ff6f4b9b4f6c41592c4ef, type: 2}
+  m_density: {fileID: 11400000, guid: aecba9f4e43ff6f4b9b4f6c41592c4ef, type: 2}
   m_damping: {fileID: 11400000, guid: aa59a93c0b0ebb84e8695600f57f717e, type: 2}
   m_restitution: {fileID: 11400000, guid: 8a771413db9e4684682424c0dfa6092f, type: 2}
   m_size: {fileID: 11400000, guid: 4f748cc857be0e74b9c51e38cd446778, type: 2}
