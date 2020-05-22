@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class Force : MonoBehaviour
 {
-	public abstract void ApplyForce(PhysicsBody body, float strength);
+	public abstract void ApplyForce(PhysicsBody body);
 }

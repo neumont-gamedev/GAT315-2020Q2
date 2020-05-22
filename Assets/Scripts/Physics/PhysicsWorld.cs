@@ -7,10 +7,9 @@ public class PhysicsWorld : MonoBehaviour
     [SerializeField] FloatRef m_gravity = null;
     [SerializeField] FloatRef m_fps = null;
     [SerializeField] BoolRef m_simulate = null;
-    [SerializeField] FloatRef m_force = null;
     [SerializeField] FloatRef m_sleep = null;
     [SerializeField] FloatRef m_resting = null;
-    [SerializeField] FloatRef m_force = null;
+    [SerializeField] FloatRef m_gravitational = null;
     [SerializeField] VectorFieldForce m_vectorField = null;
     [SerializeField] BroadPhaseEnumRef m_broadPhaseType = null;
 
@@ -38,7 +37,8 @@ public class PhysicsWorld : MonoBehaviour
 
         broadPhase = m_broadPhase[m_broadPhaseType.index];
 
-        bodies.ForEach(body => m_vectorField.ApplyForce(body, m_force));
+        GravitationalForce.ApplyForce(bodies, m_gravitational);
+        bodies.ForEach(body => m_vectorField.ApplyForce(body));
         joints.ForEach(joint => joint.ApplyForce(fixedTimeStep));
 
         timeAccumulator = (m_simulate.value) ? timeAccumulator + Time.deltaTime : 0;

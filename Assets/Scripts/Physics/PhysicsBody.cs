@@ -35,7 +35,6 @@ public class PhysicsBody : MonoBehaviour
 	public float mass { get; set; } = 3.0f;
 	public float inverseMass { get { return (mass == 0) ? 0 : 1.0f / mass; } }
 	public float gravityScale { get; set; } = 1.0f;
-	public float restitution { get; set; } = 0.5f;
 	public Shape shape { get => m_shape; set => m_shape = value; }
 	public eState state { get; set; } = eState.ACTIVE | eState.AWAKE; // state = 1, 0, 1
 
