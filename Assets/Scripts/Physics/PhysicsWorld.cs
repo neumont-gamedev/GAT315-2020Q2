@@ -7,7 +7,6 @@ public class PhysicsWorld : MonoBehaviour
     [SerializeField] FloatRef m_gravity = null;
     [SerializeField] FloatRef m_fps = null;
     [SerializeField] BoolRef m_simulate = null;
-    [SerializeField] FloatRef m_force = null;
     [SerializeField] FloatRef m_sleep = null;
     [SerializeField] FloatRef m_gravitational = null;
     [SerializeField] VectorFieldForce m_vectorField = null;
@@ -15,6 +14,7 @@ public class PhysicsWorld : MonoBehaviour
 
     [HideInInspector] public List<PhysicsBody> bodies = new List<PhysicsBody>();
     [HideInInspector] public List<PhysicsJoint> joints = new List<PhysicsJoint>();
+    [HideInInspector] public List<Force> forces = new List<Force>();
 
     List<BroadPhase> m_broadPhase = new List<BroadPhase> { new NullBroadPhase(), new QuadtreeBroadPhase(), new BVHBroadPhase() };
     BroadPhase broadPhase { get; set; } = null;
@@ -37,8 +37,11 @@ public class PhysicsWorld : MonoBehaviour
 
         broadPhase = m_broadPhase[m_broadPhaseType.index];
 
+        // forces
+        bodies.ForEach(body => forces.ForEach(force => force.ApplyForce(body)));
         GravitationalForce.ApplyForce(ref bodies, m_gravitational);
-        bodies.ForEach(body => m_vectorField.ApplyForce(body, m_force));
+        bodies.ForEach(body => m_vectorField.ApplyForce(body));
+
         joints.ForEach(joint => joint.ApplyForce(fixedTimeStep));
 
         timeAccumulator = (m_simulate.value) ? timeAccumulator + Time.deltaTime : 0;

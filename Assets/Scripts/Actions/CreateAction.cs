@@ -12,9 +12,10 @@ public class CreateAction : Action
 	[SerializeField] FloatRef m_velocity = null;
 	[SerializeField] FloatRef m_resitution = null;
 	[SerializeField] FloatRef m_density = null;
-
 	[SerializeField] FloatRef m_damping = null;
 	[SerializeField] FloatRef m_size = null;
+
+	[SerializeField] FloatRef m_effectorDrag = null;
 
 	float timer { get; set; } = 0.0f;
 
@@ -69,8 +70,37 @@ public class CreateAction : Action
 	void Create(Vector2 position, Vector2 velocity)
 	{
 		GameObject go = Instantiate(m_gameObject[m_shapeType.index], position, Quaternion.identity);
-		PhysicsBody body = go.GetComponent<PhysicsBody>();
 
+		if (go.GetComponent<PhysicsBody>() != null)
+		{
+			PhysicsBody body = go.GetComponent<PhysicsBody>();
+			CreatePhysicsBody(body, position, velocity);
+		}
+		else if (go.GetComponent<ForceEffector>() != null)
+		{
+			ForceEffector effector = go.GetComponent<ForceEffector>();
+			CreateForceEffector(effector);
+		}
+	}
+
+	void CreateForceEffector(ForceEffector effector)
+	{
+		effector.drag = m_effectorDrag;
+
+		if (effector.shape.type == Shape.eType.CIRCLE)
+		{
+			((CircleShape)effector.shape).radius = m_size.value;
+		}
+		else
+		{
+			((BoxShape)effector.shape).size = new Vector2(m_size.value, m_size.value);
+		}
+
+		m_physicsWorld.forces.Add(effector);
+	}
+
+	void CreatePhysicsBody(PhysicsBody body, Vector2 position, Vector2 velocity)
+	{
 		body.type = m_bodyType.type;
 		body.damping = m_damping.value;
 		body.restitution = m_resitution.value;

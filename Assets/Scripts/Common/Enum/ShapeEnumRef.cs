@@ -9,7 +9,8 @@ public class ShapeEnumRef : EnumRef
 	public enum	eType
 	{
 		Circle,
-		Box
+		Box,
+		CircleEffector
 	}
 	[SerializeField] eType m_type;
 
