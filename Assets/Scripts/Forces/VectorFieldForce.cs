@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VectorFieldForce : Force
+public class VectorFieldForce : MonoBehaviour
 {
     [SerializeField] VectorFieldData m_vectorField = null;
     [SerializeField] FloatRef m_force = null;
@@ -94,5 +94,4 @@ public class VectorFieldForce : Force
             }
         }
     }
-
 }

@@ -25,14 +25,7 @@ public class ForceEffector : Force
 			float force = 0.5f * (density * area * drag * (speed * speed));
 			body.ApplyForce(-velocity.normalized * force, PhysicsBody.eForceMode.FORCE);
 
-			Debug.DrawLine(body.position, body.position + -velocity.normalized * force);
-
-			//Vector2 v = body.position - position;
-			//float distance = v.magnitude;
-			//float t = Mathf.Clamp(distance /circle.radius, 0, 1);
-			//float force = (1 - (t / circle.radius)) * forceMagnitude;
-			//float force = forceMagnitude;
-			//body.ApplyForce(v.normalized * force, PhysicsBody.eForceMode.FORCE);
+			//Debug.DrawLine(body.position, body.position + -velocity.normalized * force);
 		}
 	}
 }

@@ -13,6 +13,7 @@ public class CreateAction : Action
 	[SerializeField] FloatRef m_resitution = null;
 	[SerializeField] FloatRef m_density = null;
 	[SerializeField] FloatRef m_damping = null;
+	[SerializeField] FloatRef m_restitution = null;
 	[SerializeField] FloatRef m_size = null;
 
 	[SerializeField] FloatRef m_effectorDrag = null;
@@ -28,7 +29,7 @@ public class CreateAction : Action
 			case EmissionEnumRef.eType.Single:
 				{
 					Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-					Vector2 velocity = Random.insideUnitCircle.normalized * m_velocity.value;
+					Vector2 velocity = Random.insideUnitCircle.normalized * m_velocity;
 					Create(position, velocity);
 					active = false;
 				}
@@ -38,9 +39,9 @@ public class CreateAction : Action
 				for (int i = 0; i < 20; i++)
 				{
 					//Debug.Break();
-					Vector3 offset = Random.insideUnitCircle.normalized * m_size.value * 0.5f;
+					Vector3 offset = Random.insideUnitCircle.normalized * m_size * 0.5f;
 					Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
-					Vector2 velocity = Random.insideUnitCircle.normalized * m_velocity.value;
+					Vector2 velocity = Random.insideUnitCircle.normalized * m_velocity;
 					Create(position, velocity);
 					active = false;
 				}
@@ -52,9 +53,9 @@ public class CreateAction : Action
 					timer = timer + Time.deltaTime;
 					while (timer > rateTime)
 					{
-						Vector3 offset = Random.insideUnitCircle.normalized * m_size.value * 0.5f;
+						Vector3 offset = Random.insideUnitCircle.normalized * m_size * 0.5f;
 						Vector2 position = Camera.main.ScreenToWorldPoint(Input.mousePosition) + offset;
-						Vector2 velocity = Random.insideUnitCircle.normalized * m_velocity.value;
+						Vector2 velocity = Random.insideUnitCircle.normalized * m_velocity;
 						Create(position, velocity);
 
 						timer = timer - rateTime;
@@ -102,9 +103,8 @@ public class CreateAction : Action
 	void CreatePhysicsBody(PhysicsBody body, Vector2 position, Vector2 velocity)
 	{
 		body.type = m_bodyType.type;
-		body.damping = m_damping.value;
-		body.restitution = m_resitution.value;
-
+		body.damping = m_damping;
+		body.restitution = m_resitution;
 		if (body.shape.type == Shape.eType.CIRCLE)
 		{
 			((CircleShape)body.shape).radius = m_size.value;

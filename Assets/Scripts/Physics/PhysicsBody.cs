@@ -27,6 +27,7 @@ public class PhysicsBody : MonoBehaviour
 	public Vector2 position { get { return transform.position; } set { transform.position = value; } }
 	public Vector2 force { get; set; } = Vector2.zero;
 	public Vector2 acceleration { get; set; } = Vector2.zero;
+	public Vector2 prevAcceleration { get; set; } = Vector2.zero;
 	public Vector2 velocity { get; set; } = Vector2.zero;
 	public float averageSpeed { get; set; } = 0.5f;
 	public float damping { get; set; } = 1.0f;
@@ -68,6 +69,7 @@ public class PhysicsBody : MonoBehaviour
 
 		// update acceleration
 		acceleration = acceleration + (PhysicsWorld.gravity * gravityScale) + (force / mass);
+		prevAcceleration = acceleration;
 	}
 
 	public void SetAwake(bool awake = true)

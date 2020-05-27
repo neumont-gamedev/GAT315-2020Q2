@@ -70,7 +70,7 @@ public class PhysicsWorld : MonoBehaviour
             PhysicsBody.UpdateAwake(ref contacts);
 
             // collision resolution
-            ContactSolver.Resolve(ref contacts);
+            ContactSolver.Resolve(ref contacts, m_resting.value);
 
             timeAccumulator = timeAccumulator - fixedTimeStep;
         }
